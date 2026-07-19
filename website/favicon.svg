@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+  <rect width="36" height="36" rx="6" fill="#18181b"/>
+  <!-- کتاب چپ -->
+  <rect x="3" y="4" width="8" height="28" rx="1" fill="#ffbe1a"/>
+  <rect x="4" y="8"  width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <rect x="4" y="13" width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <rect x="4" y="18" width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <!-- کتاب وسط -->
+  <rect x="14" y="4" width="8" height="28" rx="1" fill="#ffbe1a"/>
+  <rect x="15" y="8"  width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <rect x="15" y="13" width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <rect x="15" y="18" width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <!-- کتاب راست -->
+  <rect x="25" y="4" width="8" height="28" rx="1" fill="#ffbe1a"/>
+  <rect x="26" y="8"  width="6" height="2"   rx="0.5" fill="#18181b"/>
+  <rect x="26" y="13" width="6" height="2"   rx="0.5" fill="#18181b"/>
+  <rect x="26" y="18" width="6" height="2"   rx="0.5" fill="#18181b"/>
+  <rect x="26" y="23" width="6" height="2"   rx="0.5" fill="#18181b"/>
+</svg>
