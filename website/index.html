@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کانبان دسکتاپ — مدیریت کار، زمان و ایده‌های شخصی</title>
+<meta name="description" content="ابزار دسکتاپ برای مدیریت پروژه‌های شخصی با بورد کانبان، تایم‌لاین، ردیابی زمان و بورد طوفان فکری — کاملاً آفلاین و فارسی">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<style>
+:root {
+  --black:  #18181b;
+  --white:  #ffffff;
+  --yellow: #ffbe1a;
+  --gray50: #fafafa;
+  --gray100:#f4f4f5;
+  --gray200:#e4e4e7;
+  --gray400:#a1a1aa;
+  --gray600:#52525b;
+  --green:  #00c8a0;
+  --blue:   #00b0ff;
+  --pink:   #ff90e8;
+  --orange: #ff5c00;
+  --radius: 14px;
+  --shadow: 5px 5px 0 var(--black);
+  --shadow-sm: 3px 3px 0 var(--black);
+  /* dark mode */
+  --bg: var(--white);
+  --text: var(--black);
+  --card-bg: var(--white);
+  --nav-bg: var(--white);
+  --section-alt: var(--gray50);
+}
+[data-theme="dark"] {
+  --bg: #0f0f11;
+  --text: #f4f4f5;
+  --card-bg: #1e1e22;
+  --nav-bg: #18181b;
+  --section-alt: #18181b;
+  --gray50: #1e1e22;
+  --gray100:#27272a;
+  --gray200:#3f3f46;
+  --gray600:#a1a1aa;
+  --black: #f4f4f5;
+  --white: #0f0f11;
+  --shadow: 5px 5px 0 #3f3f46;
+  --shadow-sm: 3px 3px 0 #3f3f46;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Vazirmatn', Tahoma, sans-serif;
+  direction: rtl;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition: background 0.2s, color 0.2s;
+}
+a { color: inherit; text-decoration: none; }
+
+/* utils */
+.container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+.section-label {
+  display: inline-block; background: var(--yellow); border: 2px solid var(--black);
+  border-radius: 8px; padding: 4px 16px; font-size: 12px; font-weight: 900;
+  margin-bottom: 14px; box-shadow: var(--shadow-sm); color: #18181b;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px; border-radius: 12px; font-size: 15px; font-weight: 900;
+  border: 2.5px solid var(--black); cursor: pointer; transition: transform 0.1s, box-shadow 0.1s;
+  font-family: 'Vazirmatn', sans-serif;
+}
+.btn:hover { transform: translate(-2px,-2px); }
+.btn-primary { background: var(--yellow); color: #18181b; box-shadow: var(--shadow); }
+.btn-primary:hover { box-shadow: 7px 7px 0 var(--black); }
+.btn-outline { background: transparent; color: var(--text); box-shadow: var(--shadow-sm); }
+.btn-outline:hover { background: var(--gray100); box-shadow: var(--shadow); }
+.btn-large { padding: 16px 36px; font-size: 17px; border-radius: 14px; }
+.btn-white { background: var(--white); color: #18181b; box-shadow: 5px 5px 0 #3f3f46; }
+.btn-white:hover { box-shadow: 7px 7px 0 #3f3f46; }
+.btn-yellow-dark { background: var(--yellow); color: #18181b; box-shadow: 5px 5px 0 #3f3f46; }
+.btn-yellow-dark:hover { box-shadow: 7px 7px 0 #3f3f46; }
+
+/* ── NAVBAR ── */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--nav-bg); border-bottom: 2.5px solid var(--black);
+  padding: 14px 0;
+}
+.navbar .inner { display: flex; align-items: center; justify-content: space-between; }
+.navbar .logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 900; }
+.navbar .logo-icon {
+  width: 36px; height: 36px; background: var(--yellow);
+  border: 2px solid #18181b; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; box-shadow: var(--shadow-sm);
+}
+.navbar nav { display: flex; align-items: center; gap: 8px; }
+.navbar nav a { padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; transition: background 0.15s; }
+.navbar nav a:hover { background: var(--gray100); }
+.navbar nav .btn { padding: 8px 18px; font-size: 13px; }
+
+/* theme toggle */
+.theme-btn {
+  width: 36px; height: 36px; border-radius: 8px; border: 2px solid var(--black);
+  background: var(--gray100); cursor: pointer; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-sm); transition: all 0.15s;
+}
+.theme-btn:hover { background: var(--gray200); }
+
+/* ── HERO ── */
+.hero {
+  padding: 80px 0 60px;
+  background: linear-gradient(160deg, #fffbeb 0%, var(--gray50) 60%, #f0fffe 100%);
+  border-bottom: 2.5px solid var(--black);
+  position: relative; overflow: hidden;
+}
+[data-theme="dark"] .hero { background: linear-gradient(160deg, #1a1500 0%, #0f0f11 60%, #001a15 100%); }
+.hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.hero h1 { font-size: 46px; font-weight: 900; line-height: 1.2; margin-bottom: 20px; }
+.hero h1 span { color: var(--orange); position: relative; }
+.hero h1 span::after { content:''; position:absolute; bottom:2px; right:0; left:0; height:4px; background:var(--yellow); border-radius:2px; }
+.hero-desc { font-size: 17px; color: var(--gray600); margin-bottom: 32px; line-height: 1.9; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.hero-note { font-size: 12px; color: var(--gray400); margin-top: 12px; }
+.hero-visual {
+  background: #18181b; border: 2.5px solid #18181b;
+  border-radius: 16px; box-shadow: 8px 8px 0 #18181b;
+  overflow: hidden; aspect-ratio: 16/10; display: flex; flex-direction: column;
+}
+.hero-visual .win-bar { background: #27272a; padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
+.win-dot { width: 12px; height: 12px; border-radius: 50%; }
+.hero-visual .win-content { flex: 1; background: #18181b; padding: 16px; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
+.mini-col { background: #27272a; border: 1.5px solid #3f3f46; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+.mini-col-title { font-size: 10px; font-weight: 800; color: #a1a1aa; border-bottom: 1px solid #3f3f46; padding-bottom: 4px; margin-bottom: 2px; }
+.mini-card { background: #18181b; border: 1.5px solid #3f3f46; border-radius: 5px; padding: 5px 6px; font-size: 9px; color: #f4f4f5; font-weight: 600; }
+.mini-card .priority { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-left: 4px; vertical-align: middle; }
+.mini-tag { display: inline-block; background: #3f3f46; border-radius: 3px; padding: 1px 5px; font-size: 8px; color: #a1a1aa; margin-top: 3px; }
+
+/* ── TRUST BAR ── */
+.trust { background: var(--yellow); border-bottom: 2.5px solid #18181b; padding: 16px 0; }
+.trust-inner { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: #18181b; }
+
+/* ── FEATURES ── */
+.features { padding: 88px 0; background: var(--bg); }
+.features-header { text-align: center; margin-bottom: 56px; }
+.features-header h2 { font-size: 36px; font-weight: 900; margin-bottom: 12px; }
+.features-header p { font-size: 16px; color: var(--gray600); }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.feature-card {
+  border: 2.5px solid var(--black); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 28px; background: var(--card-bg);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.feature-card:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--black); }
+.feature-icon { width: 52px; height: 52px; border-radius: 12px; border: 2px solid var(--black); display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
+.feature-card h3 { font-size: 17px; font-weight: 900; margin-bottom: 8px; }
+.feature-card p { font-size: 13px; color: var(--gray600); line-height: 1.8; }
+.feature-card ul { margin-top: 12px; padding-right: 18px; }
+.feature-card li { font-size: 12px; color: var(--gray600); margin: 4px 0; }
+
+/* ── SPOTLIGHT ── */
+.spotlight { background: #18181b; color: #f4f4f5; border-top: 2.5px solid #18181b; border-bottom: 2.5px solid #18181b; padding: 88px 0; }
+.spotlight-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.spotlight h2 { font-size: 34px; font-weight: 900; margin-bottom: 18px; line-height: 1.3; }
+.spotlight p { font-size: 15px; color: #a1a1aa; line-height: 1.9; margin-bottom: 12px; }
+.spotlight-list { list-style: none; margin-top: 20px; }
+.spotlight-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #d4d4d8; margin: 10px 0; }
+.spotlight-list li::before { content: '✓'; color: var(--green); font-weight: 900; margin-top: 2px; flex-shrink: 0; }
+.bs-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.bs-card { background: #27272a; border: 1.5px solid #3f3f46; border-radius: 12px; padding: 16px; }
+.bs-card-title { font-size: 13px; font-weight: 800; color: #f4f4f5; margin-bottom: 6px; }
+.bs-card-body { font-size: 11px; color: #a1a1aa; line-height: 1.7; }
+.bs-card-tags { margin-top: 8px; display: flex; gap: 4px; flex-wrap: wrap; }
+.bs-tag { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; border: 1px solid #3f3f46; }
+
+/* ── HOW ── */
+.how { padding: 88px 0; background: var(--section-alt); border-top: 2.5px solid var(--black); border-bottom: 2.5px solid var(--black); }
+.how-header { text-align: center; margin-bottom: 56px; }
+.how-header h2 { font-size: 34px; font-weight: 900; margin-bottom: 10px; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.step { text-align: center; padding: 28px 20px; background: var(--card-bg); border: 2.5px solid var(--black); border-radius: var(--radius); box-shadow: var(--shadow); position: relative; }
+.step::after { content: '←'; position: absolute; top: 50%; left: -22px; transform: translateY(-50%); font-size: 20px; color: var(--yellow); font-weight: 900; }
+.step:last-child::after { display: none; }
+.step-num { width: 44px; height: 44px; background: var(--yellow); border: 2.5px solid #18181b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; margin: 0 auto 14px; box-shadow: var(--shadow-sm); color: #18181b; }
+.step h3 { font-size: 14px; font-weight: 800; margin-bottom: 6px; }
+.step p { font-size: 12px; color: var(--gray600); }
+
+/* ── STATS ── */
+.stats-section { padding: 88px 0; background: var(--bg); }
+.stats-header { text-align: center; margin-bottom: 56px; }
+.stats-header h2 { font-size: 34px; font-weight: 900; margin-bottom: 10px; }
+.stats-visual { background: var(--gray100); border: 2.5px solid var(--black); border-radius: 16px; box-shadow: var(--shadow); padding: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.stat-box { background: var(--card-bg); border: 2px solid var(--black); border-radius: 12px; padding: 20px; box-shadow: var(--shadow-sm); text-align: center; }
+.stat-num { font-size: 32px; font-weight: 900; color: var(--orange); }
+.stat-label { font-size: 12px; color: var(--gray600); font-weight: 600; margin-top: 4px; }
+.heatmap { grid-column: 1/-1; }
+.heatmap-title { font-size: 13px; font-weight: 800; margin-bottom: 12px; }
+.heatmap-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; }
+.hm-cell { height: 28px; border-radius: 4px; border: 1px solid var(--gray200); }
+
+/* ── PRICING ── */
+.pricing { padding: 88px 0; background: var(--section-alt); border-top: 2.5px solid var(--black); }
+.pricing-header { text-align: center; margin-bottom: 48px; }
+.pricing-header h2 { font-size: 34px; font-weight: 900; margin-bottom: 10px; }
+.pricing-header p { font-size: 15px; color: var(--gray600); }
+.pricing-vat { font-size: 12px; color: var(--gray400); margin-top: 8px; }
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 820px; margin: 0 auto; }
+.plan { background: var(--card-bg); border: 2.5px solid var(--black); border-radius: 18px; box-shadow: var(--shadow); padding: 36px; position: relative; }
+.plan.featured { background: #18181b; color: #f4f4f5; border-color: #18181b; transform: scale(1.03); }
+.plan.featured .plan-price { color: var(--yellow); }
+.plan.featured .plan-period { color: #a1a1aa; }
+.plan.featured .plan-desc { color: #a1a1aa; border-color: #3f3f46; }
+.plan.featured .plan-row { border-color: #3f3f46; }
+.plan.featured .plan-row .row-label { color: #d4d4d8; }
+.plan.featured .plan-row.included .row-label { color: #f4f4f5; font-weight: 700; }
+.plan-badge { position: absolute; top: -14px; right: 28px; background: var(--yellow); border: 2px solid #18181b; border-radius: 6px; padding: 3px 14px; font-size: 11px; font-weight: 900; box-shadow: var(--shadow-sm); color: #18181b; }
+.plan-name { font-size: 20px; font-weight: 900; margin-bottom: 8px; }
+.plan-price { font-size: 38px; font-weight: 900; margin-bottom: 4px; }
+.plan-price span { font-size: 16px; font-weight: 600; }
+.plan-period { font-size: 12px; color: var(--gray400); margin-bottom: 6px; }
+.plan-desc { font-size: 13px; color: var(--gray600); margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1.5px solid var(--gray200); }
+.plan-rows { display: flex; flex-direction: column; margin-bottom: 28px; }
+.plan-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--gray100); font-size: 13px; }
+.plan.featured .plan-row { border-color: #2a2a2e; }
+.plan-row .row-label { color: var(--gray600); }
+.plan-row .row-val { font-weight: 700; }
+.plan-row.included .row-label { color: var(--text); font-weight: 600; }
+.plan .btn { width: 100%; justify-content: center; }
+
+/* ── SUPPORT ── */
+.support-section { padding: 80px 0; background: var(--bg); border-top: 2.5px solid var(--black); }
+.support-header { text-align: center; margin-bottom: 40px; }
+.support-header h2 { font-size: 34px; font-weight: 900; margin-bottom: 10px; }
+.support-header p { font-size: 15px; color: var(--gray600); }
+.support-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 820px; margin: 0 auto; }
+.support-card { background: var(--card-bg); border: 2.5px solid var(--black); border-radius: var(--radius); box-shadow: var(--shadow); padding: 32px; text-align: center; transition: transform 0.15s; }
+.support-card:hover { transform: translate(-3px,-3px); }
+.support-icon { font-size: 40px; margin-bottom: 16px; }
+.support-card h3 { font-size: 17px; font-weight: 900; margin-bottom: 10px; }
+.support-card p { font-size: 13px; color: var(--gray600); line-height: 1.8; margin-bottom: 20px; }
+
+/* ── FAQ ── */
+.faq { padding: 88px 0; border-top: 2.5px solid var(--black); background: var(--section-alt); }
+.faq-header { text-align: center; margin-bottom: 48px; }
+.faq-header h2 { font-size: 34px; font-weight: 900; }
+.faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item { border: 2.5px solid var(--black); border-radius: 12px; box-shadow: var(--shadow-sm); overflow: hidden; }
+.faq-q { padding: 18px 20px; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: space-between; background: var(--card-bg); }
+.faq-q:hover { background: var(--gray100); }
+.faq-q .icon { font-size: 18px; transition: transform 0.2s; flex-shrink: 0; }
+.faq-a { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; font-size: 13px; color: var(--gray600); line-height: 1.9; background: var(--gray50); border-top: 1.5px solid var(--gray200); }
+.faq-item.open .faq-a { max-height: 220px; padding: 16px 20px; }
+.faq-item.open .faq-q { background: var(--yellow); color: #18181b; }
+.faq-item.open .icon { transform: rotate(45deg); }
+
+/* ── CTA ── */
+.cta { padding: 88px 0; background: #18181b; color: #f4f4f5; text-align: center; border-top: 2.5px solid #18181b; }
+.cta h2 { font-size: 40px; font-weight: 900; margin-bottom: 14px; }
+.cta p { font-size: 16px; color: #a1a1aa; margin-bottom: 36px; max-width: 560px; margin-left: auto; margin-right: auto; }
+.cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ── FOOTER ── */
+.footer { background: #0f0f11; color: #f4f4f5; border-top: 2.5px solid #27272a; padding: 40px 0 24px; }
+.footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 28px; border-bottom: 1px solid #27272a; margin-bottom: 24px; }
+.footer-brand .logo { font-size: 18px; font-weight: 900; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.footer-brand p { font-size: 12px; color: #71717a; line-height: 1.8; }
+.footer-col h4 { font-size: 13px; font-weight: 800; margin-bottom: 14px; color: #d4d4d8; }
+.footer-col a { display: block; font-size: 12px; color: #71717a; margin: 6px 0; transition: color 0.15s; }
+.footer-col a:hover { color: var(--yellow); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #52525b; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .hero h1 { font-size: 32px; }
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .spotlight-inner { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .step::after { display: none; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 440px; }
+  .plan.featured { transform: none; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .support-grid { grid-template-columns: 1fr; max-width: 440px; }
+}
+@media (max-width: 600px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .navbar nav .hide-mobile { display: none; }
+  .hero h1 { font-size: 28px; }
+  .stats-visual { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<header class="navbar">
+  <div class="container inner">
+    <a href="index.html" class="logo">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="36" height="36" rx="6" fill="#18181b"/>
+  <!-- کتاب چپ -->
+  <rect x="3" y="4" width="8" height="28" rx="1" fill="#ffbe1a"/>
+  <rect x="4" y="8"  width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <rect x="4" y="13" width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <rect x="4" y="18" width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <!-- کتاب وسط -->
+  <rect x="14" y="4" width="8" height="28" rx="1" fill="#ffbe1a"/>
+  <rect x="15" y="8"  width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <rect x="15" y="13" width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <rect x="15" y="18" width="6" height="2.5" rx="0.5" fill="#18181b"/>
+  <!-- کتاب راست -->
+  <rect x="25" y="4" width="8" height="28" rx="1" fill="#ffbe1a"/>
+  <rect x="26" y="8"  width="6" height="2"   rx="0.5" fill="#18181b"/>
+  <rect x="26" y="13" width="6" height="2"   rx="0.5" fill="#18181b"/>
+  <rect x="26" y="18" width="6" height="2"   rx="0.5" fill="#18181b"/>
+  <rect x="26" y="23" width="6" height="2"   rx="0.5" fill="#18181b"/>
+</svg>
+      <span>کانبان دسکتاپ</span>
+    </a>
+    <nav>
+      <a href="#features" class="hide-mobile">ویژگی‌ها</a>
+      <a href="#pricing" class="hide-mobile">قیمت‌گذاری</a>
+      <a href="user-guide.html" class="hide-mobile">راهنما</a>
+      <a href="/login" class="btn btn-outline" style="margin-right:4px;">ورود به حساب</a>
+      <a href="#pricing" class="btn btn-primary">دانلود رایگان</a>
+      <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="تغییر تم">🌙</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div style="margin-bottom:18px;">
+          <span style="display:inline-block;background:var(--yellow);border:2px solid #18181b;border-radius:20px;padding:4px 14px;font-size:12px;font-weight:800;color:#18181b;">✨ نسخه ۲.۰.۰ منتشر شد</span>
+        </div>
+        <h1>مدیریت کار و زمان<br>به <span>سبک حرفه‌ای‌ها</span></h1>
+        <p class="hero-desc">ابزاری دسکتاپ برای مدیریت پروژه‌های شخصی با بورد کانبان، ردیابی دقیق زمان، تایم‌لاین شمسی و فضای ایده‌پردازی — کاملاً آفلاین، کاملاً فارسی.</p>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn btn-primary btn-large">⬇ دانلود رایگان</a>
+          <a href="user-guide.html" class="btn btn-outline btn-large">📖 راهنمای کاربر</a>
+        </div>
+        <p class="hero-note">بدون نیاز به اینترنت · بدون ثبت‌نام · داده‌ها فقط روی سیستم شما</p>
+      </div>
+      <div class="hero-visual">
+        <div class="win-bar">
+          <div class="win-dot" style="background:#ff5f57"></div>
+          <div class="win-dot" style="background:#febc2e"></div>
+          <div class="win-dot" style="background:#28c840"></div>
+          <span style="font-size:11px;color:#71717a;margin-right:auto;">کانبان دسکتاپ — پروژه من</span>
+        </div>
+        <div class="win-content">
+          <div class="mini-col">
+            <div class="mini-col-title">انجام نشده</div>
+            <div class="mini-card"><span class="priority" style="background:#ff5c00"></span>طراحی UI<div class="mini-tag">فرانت‌اند</div></div>
+            <div class="mini-card"><span class="priority" style="background:#ffc900"></span>بازبینی API</div>
+          </div>
+          <div class="mini-col">
+            <div class="mini-col-title">در حال انجام</div>
+            <div class="mini-card" style="border-color:#00c8a0"><span class="priority" style="background:#ff5c00"></span>پیاده‌سازی Auth<div class="mini-tag">بک‌اند</div></div>
+          </div>
+          <div class="mini-col">
+            <div class="mini-col-title">در بازبینی</div>
+            <div class="mini-card"><span class="priority" style="background:#00b0ff"></span>تست یکپارچه</div>
+            <div class="mini-card"><span class="priority" style="background:#a1a1aa"></span>مستندات</div>
+          </div>
+          <div class="mini-col">
+            <div class="mini-col-title" style="color:#00c8a0">انجام شده ✓</div>
+            <div class="mini-card" style="opacity:0.6"><span class="priority" style="background:#00c8a0"></span>نیازمندی‌ها</div>
+            <div class="mini-card" style="opacity:0.6"><span class="priority" style="background:#00c8a0"></span>دیتابیس</div>
+            <div class="mini-card" style="opacity:0.6"><span class="priority" style="background:#00c8a0"></span>Wireframe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Trust Bar ── -->
+<div class="trust">
+  <div class="container">
+    <div class="trust-inner">
+      <div class="trust-item">🔒 کاملاً آفلاین</div>
+      <div class="trust-item">🇮🇷 فارسی و RTL کامل</div>
+      <div class="trust-item">📅 تقویم شمسی</div>
+      <div class="trust-item">💾 داده‌ها فقط روی سیستم شما</div>
+      <div class="trust-item">🚀 بدون نیاز به اینترنت</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Features ── -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="features-header">
+      <div class="section-label">ویژگی‌های اصلی</div>
+      <h2>هر چیزی که برای مدیریت پروژه نیاز دارید</h2>
+      <p>در یک نرم‌افزار دسکتاپ سریع، بدون حواس‌پرتی و بدون اینترنت</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fff0f6">📌</div>
+        <h3>بورد کانبان هوشمند</h3>
+        <p>مدیریت کارها با Drag & Drop روان. اولویت‌بندی، برچسب‌گذاری، وابستگی بین کارها و فازبندی پروژه.</p>
+        <ul><li>ستون‌های قابل تنظیم</li><li>یادداشت پایانی (Post-Mortem)</li><li>ترتیب اجرای دستی</li><li>وابستگی بین کارها</li></ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#f0fff8">⏱</div>
+        <h3>ردیابی دقیق زمان</h3>
+        <p>تایمر داخلی که هر بازه فعالیت را ثبت می‌کند. مقایسه زمان تخمینی با واقعی برای بهبود برنامه‌ریزی.</p>
+        <ul><li>بازه‌های فعالیت جداگانه</li><li>گزارش زمان با ساعت دقیق</li><li>مقایسه تخمین و واقعیت</li><li>آمار بهره‌وری روزانه</li></ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fffbeb">📊</div>
+        <h3>تایم‌لاین (Gantt) شمسی</h3>
+        <p>نمایش بصری زمان‌بندی کارها با تقویم شمسی دقیق. زوم از ماه‌ها تا دقیقه‌ها.</p>
+        <ul><li>تقویم شمسی کامل</li><li>۵ سطح زوم</li><li>نمایش بازه‌های تایمر</li><li>گروه‌بندی بر اساس فاز</li></ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#f0f8ff">📈</div>
+        <h3>داشبورد آمار ۶ تب</h3>
+        <p>تحلیل عمیق عملکرد با نمودارهای متنوع: Burndown، Heatmap شمسی، Cumulative Flow و بیشتر.</p>
+        <ul><li>Heatmap ماهانه شمسی</li><li>Burndown Chart</li><li>تحلیل Lead/Cycle Time</li><li>ماتریس سلامت تخمین</li></ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fdf4ff">🧠</div>
+        <h3>بورد طوفان فکری</h3>
+        <p>فضایی آزاد برای ثبت ایده‌ها، منابع و اطلاعات پروژه — با لینک به پوشه و فایل‌های روی سیستم.</p>
+        <ul><li>کارت‌های Grid و List</li><li>دسته‌بندی و برچسب</li><li>لینک به پوشه و فایل</li><li>ذخیره خودکار</li></ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#f0fffe">🗄</div>
+        <h3>آرشیو و آمار جامع</h3>
+        <p>کارهای تمام‌شده را آرشیو کنید. یادداشت پایانی برای هر کار و گزارش‌های تاریخی کامل.</p>
+        <ul><li>آرشیو با قابلیت بازگشت</li><li>تاریخچه جابجایی کارها</li><li>گزارش بازه‌های فعالیت</li><li>تحلیل کلمات پرتکرار</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Brainstorm Spotlight ── -->
+<section class="spotlight">
+  <div class="container">
+    <div class="spotlight-inner">
+      <div>
+        <div class="section-label" style="background:var(--yellow);color:#18181b;margin-bottom:14px;display:inline-block;">جدید در نسخه ۲.۰</div>
+        <h2>📌 ثبت ایده‌ها و اطلاعات<br>در کنار پروژه‌تان</h2>
+        <p>بورد طوفان فکری فضایی است که قبل از تبدیل ایده به کارت کانبان، می‌توانید آزادانه یادداشت بگیرید، منابع جمع کنید و اطلاعات پروژه را سازمان‌دهی کنید.</p>
+        <p>هر کارت می‌تواند محتوای متنی، لینک، آدرس پوشه و فایل‌های روی سیستم شما داشته باشد.</p>
+        <ul class="spotlight-list">
+          <li>دسته‌بندی: متن، تصویر، صوت، ویدیو، PDF و بیشتر</li>
+          <li>برچسب‌های رنگی سفارشی</li>
+          <li>باز کردن پوشه با یک کلیک</li>
+          <li>کپی لینک با یک کلیک</li>
+          <li>ذخیره خودکار هنگام تایپ</li>
+          <li>جستجو و فیلتر پیشرفته</li>
+        </ul>
+      </div>
+      <div class="bs-cards">
+        <div class="bs-card">
+          <div class="bs-card-title">💡 الگوریتم دسته‌بندی هوشمند</div>
+          <div class="bs-card-body">استفاده از NLP فارسی برای تشخیص خودکار دسته‌بندی تراکنش‌ها بر اساس شرح پرداخت.</div>
+          <div class="bs-card-tags"><span class="bs-tag" style="background:#00b0ff22;color:#00b0ff;border-color:#00b0ff44">فنی</span><span class="bs-tag" style="background:#ffc90022;color:#ffc900;border-color:#ffc90044">تجاری</span></div>
+        </div>
+        <div class="bs-card">
+          <div class="bs-card-title">🔗 مستندات API</div>
+          <div class="bs-card-body">docs.example.com/api/v2</div>
+          <div class="bs-card-tags"><span class="bs-tag" style="background:#e040fb22;color:#e040fb;border-color:#e040fb44">آینده</span></div>
+        </div>
+        <div class="bs-card">
+          <div class="bs-card-title">📁 فایل‌های پروژه</div>
+          <div class="bs-card-body">D:\Projects\Design\wireframes</div>
+          <div class="bs-card-tags"><span class="bs-tag" style="background:#00c8a022;color:#00c8a0;border-color:#00c8a044">📂 پوشه</span></div>
+        </div>
+        <div class="bs-card">
+          <div class="bs-card-title">🎯 اهداف فصل سوم</div>
+          <div class="bs-card-body">انتشار نسخه موبایل، جذب ۵۰۰ کاربر، راه‌اندازی وبلاگ</div>
+          <div class="bs-card-tags"><span class="bs-tag" style="background:#ffc90022;color:#ffc900;border-color:#ffc90044">تجاری</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How it Works ── -->
+<section class="how">
+  <div class="container">
+    <div class="how-header">
+      <div class="section-label">چطور کار می‌کند؟</div>
+      <h2>در ۴ قدم شروع کنید</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">۱</div><h3>دانلود و نصب</h3><p>نرم‌افزار را دانلود و روی ویندوز نصب کنید. هیچ ثبت‌نامی لازم نیست.</p></div>
+      <div class="step"><div class="step-num">۲</div><h3>پروژه بسازید</h3><p>پروژه جدید ایجاد کنید و کارهای خود را اضافه کنید.</p></div>
+      <div class="step"><div class="step-num">۳</div><h3>تایمر بزنید</h3><p>هر بار که کار می‌کنید، تایمر را فعال کنید تا زمان دقیق ثبت شود.</p></div>
+      <div class="step"><div class="step-num">۴</div><h3>پیشرفت را ببینید</h3><p>در داشبورد آمار، عملکرد و پیشرفت خود را تحلیل کنید.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats ── -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-header">
+      <div class="section-label">داشبورد آمار</div>
+      <h2>داده‌هایتان را درک کنید</h2>
+    </div>
+    <div class="stats-visual">
+      <div class="stat-box"><div class="stat-num">۸۴٪</div><div class="stat-label">دقت تخمین زمان</div></div>
+      <div class="stat-box"><div class="stat-num">۴۲h</div><div class="stat-label">زمان کار این ماه</div></div>
+      <div class="stat-box"><div class="stat-num">۱۸</div><div class="stat-label">کار تکمیل‌شده</div></div>
+      <div class="heatmap">
+        <div class="heatmap-title">📅 Heatmap فعالیت ماهانه</div>
+        <div class="heatmap-grid" id="heatmapGrid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pricing ── -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <div class="section-label">قیمت‌گذاری</div>
+      <h2>ساده، شفاف، بدون تعجب</h2>
+      <p>نسخه پایه رایگان و کامل است. نسخه پرو برای کسانی که بیشتر نیاز دارند.</p>
+      <p class="pricing-vat">* قیمت با احتساب ۱۰٪ مالیات بر ارزش افزوده است</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- free -->
+      <div class="plan">
+        <div class="plan-name">نسخه پایه</div>
+        <div class="plan-price">رایگان</div>
+        <div class="plan-period">برای همیشه</div>
+        <div class="plan-desc">مناسب برای مدیریت تا ۲ پروژه فعال با تمام امکانات اصلی.</div>
+        <div class="plan-rows">
+          <div class="plan-row included"><span class="row-label">تعداد پروژه فعال</span><span class="row-val">۲ پروژه</span></div>
+          <div class="plan-row included"><span class="row-label">بورد کانبان</span><span class="row-val" style="color:#00c8a0">✅ کامل</span></div>
+          <div class="plan-row included"><span class="row-label">بورد طوفان فکری</span><span class="row-val" style="color:#00c8a0">✅ کامل</span></div>
+          <div class="plan-row included"><span class="row-label">تایم‌لاین (Gantt)</span><span class="row-val" style="color:#00c8a0">✅ کامل</span></div>
+          <div class="plan-row included"><span class="row-label">داشبورد آمار ۶ تب</span><span class="row-val" style="color:#00c8a0">✅ کامل</span></div>
+          <div class="plan-row"><span class="row-label" style="color:var(--gray400)">Export / Import JSON</span><span class="row-val" style="color:var(--gray400)">❌</span></div>
+          <div class="plan-row"><span class="row-label" style="color:var(--gray400)">خروجی برای AI</span><span class="row-val" style="color:var(--gray400)">❌</span></div>
+          <div class="plan-row"><span class="row-label" style="color:var(--gray400)">پشتیبانی فنی</span><span class="row-val" style="color:var(--gray400)">❌</span></div>
+        </div>
+        <a href="#download" class="btn btn-outline" style="width:100%;justify-content:center;">دانلود رایگان</a>
+      </div>
+
+      <!-- pro -->
+      <div class="plan featured">
+        <div class="plan-badge">محبوب‌ترین</div>
+        <div class="plan-name">نسخه پرو</div>
+        <div class="plan-price">۴۹۵,۰۰۰ <span>تومان</span></div>
+        <div class="plan-period">اعتبار ۱ ساله از تاریخ فعال‌سازی</div>
+        <div class="plan-desc">برای افراد حرفه‌ای با پروژه‌های متعدد که به Import/Export و خروجی AI نیاز دارند.</div>
+        <div class="plan-rows">
+          <div class="plan-row included"><span class="row-label">تعداد پروژه فعال</span><span class="row-val" style="color:var(--yellow)">نامحدود ∞</span></div>
+          <div class="plan-row included"><span class="row-label">بورد کانبان</span><span class="row-val" style="color:#00c8a0">✅ کامل</span></div>
+          <div class="plan-row included"><span class="row-label">بورد طوفان فکری</span><span class="row-val" style="color:#00c8a0">✅ کامل</span></div>
+          <div class="plan-row included"><span class="row-label">تایم‌لاین (Gantt)</span><span class="row-val" style="color:#00c8a0">✅ کامل</span></div>
+          <div class="plan-row included"><span class="row-label">داشبورد آمار ۶ تب</span><span class="row-val" style="color:#00c8a0">✅ کامل</span></div>
+          <div class="plan-row included"><span class="row-label">Export / Import JSON</span><span class="row-val" style="color:#00c8a0">✅ کامل</span></div>
+          <div class="plan-row included"><span class="row-label">خروجی برای AI (JSON/MD)</span><span class="row-val" style="color:#00c8a0">✅ کامل</span></div>
+          <div class="plan-row included"><span class="row-label">کد لایسنس (۳ سیستم)</span><span class="row-val" style="color:var(--yellow)">✅ ۳ کد مجزا</span></div>
+          <div class="plan-row included"><span class="row-label">پشتیبانی فنی</span><span class="row-val" style="color:#00c8a0">✅ ۱ ساله</span></div>
+        </div>
+        <a href="/login" class="btn btn-primary" style="width:100%;justify-content:center;font-size:16px;border-color:#18181b;">خرید و فعال‌سازی</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Support ── -->
+<section class="support-section" id="support">
+  <div class="container">
+    <div class="support-header">
+      <div class="section-label">پشتیبانی</div>
+      <h2>چطور کمک بگیرید؟</h2>
+      <p>برای هر نوع مشکل، روش مناسب را انتخاب کنید</p>
+    </div>
+    <div class="support-grid">
+      <div class="support-card">
+        <div class="support-icon">🎫</div>
+        <h3>پشتیبانی لایسنس و فعال‌سازی</h3>
+        <p>برای مشکلات مرتبط با خرید، فعال‌سازی لایسنس، یا مدیریت حساب کاربری، از طریق سیستم تیکت در حساب کاربری خود اقدام کنید.</p>
+        <a href="/login" class="btn btn-primary" style="width:100%;justify-content:center;">ورود و ارسال تیکت</a>
+      </div>
+      <div class="support-card">
+        <div class="support-icon">🐛</div>
+        <h3>گزارش باگ و مشکلات نرم‌افزاری</h3>
+        <p>برای اعلام باگ، پیشنهاد ویژگی جدید، یا گزارش مشکلات فنی نرم‌افزار، از بخش Issues صفحه پروژه در GitHub اقدام کنید.</p>
+        <a href="https://github.com/behroozsheikhan/kanban-desktop/issues" target="_blank" class="btn btn-outline" style="width:100%;justify-content:center;">باز کردن Issue در GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq">
+  <div class="container">
+    <div class="faq-header">
+      <div class="section-label">سؤالات متداول</div>
+      <h2>پاسخ به سؤالات شما</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>آیا داده‌هایم به اینترنت ارسال می‌شود؟</span><span class="icon">+</span></div>
+        <div class="faq-a">خیر، کانبان دسکتاپ کاملاً آفلاین کار می‌کند. تمام داده‌ها روی سیستم خودتان در یک فایل SQLite ذخیره می‌شود. هیچ اطلاعاتی به هیچ سروری ارسال نمی‌شود.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>آیا می‌توانم از داده‌هایم پشتیبان بگیرم؟</span><span class="icon">+</span></div>
+        <div class="faq-a">بله، در نسخه پرو می‌توانید هر پروژه را به صورت فایل JSON خروجی بگیرید و در سیستم دیگری Import کنید. نسخه رایگان این قابلیت را ندارد.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>آیا روی چند سیستم می‌توانم نصب کنم؟</span><span class="icon">+</span></div>
+        <div class="faq-a">نسخه پرو شامل ۳ کد لایسنس مجزا است که می‌توانید روی ۳ سیستم مختلف نصب و فعال کنید.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>بعد از اتمام ۱ سال اعتبار چه اتفاقی می‌افتد؟</span><span class="icon">+</span></div>
+        <div class="faq-a">بعد از اتمام اعتبار، نرم‌افزار به حالت نسخه پایه برمی‌گردد. داده‌های شما حذف نمی‌شود و به آن‌ها دسترسی دارید، ولی قابلیت‌های پرو غیرفعال می‌شود.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>آیا نسخه موبایل یا مک وجود دارد؟</span><span class="icon">+</span></div>
+        <div class="faq-a">در حال حاضر فقط نسخه ویندوز موجود است. نسخه macOS و Linux در برنامه توسعه قرار دارند.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>«خروجی برای AI» یعنی چه؟</span><span class="icon">+</span></div>
+        <div class="faq-a">می‌توانید اطلاعات پروژه را به فرمت JSON یا Markdown خروجی بگیرید تا مستقیم در ChatGPT، Claude یا سایر ابزارهای AI استفاده کنید.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta" id="download">
+  <div class="container">
+    <h2>همین الان شروع کنید</h2>
+    <p>نسخه پایه رایگان است و همه امکانات اصلی را دارد. هیچ ثبت‌نام یا پرداخت نیاز ندارد.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn btn-yellow-dark btn-large">⬇ دانلود رایگان برای ویندوز</a>
+      <a href="user-guide.html" class="btn btn-white btn-large">📖 راهنمای کاربر</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo"><svg width="24" height="24" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="6" fill="#18181b"/><rect x="3" y="4" width="8" height="28" rx="1" fill="#ffbe1a"/><rect x="4" y="8" width="6" height="2.5" rx="0.5" fill="#18181b"/><rect x="4" y="13" width="6" height="2.5" rx="0.5" fill="#18181b"/><rect x="4" y="18" width="6" height="2.5" rx="0.5" fill="#18181b"/><rect x="14" y="4" width="8" height="28" rx="1" fill="#ffbe1a"/><rect x="15" y="8" width="6" height="2.5" rx="0.5" fill="#18181b"/><rect x="15" y="13" width="6" height="2.5" rx="0.5" fill="#18181b"/><rect x="15" y="18" width="6" height="2.5" rx="0.5" fill="#18181b"/><rect x="25" y="4" width="8" height="28" rx="1" fill="#ffbe1a"/><rect x="26" y="8" width="6" height="2" rx="0.5" fill="#18181b"/><rect x="26" y="13" width="6" height="2" rx="0.5" fill="#18181b"/><rect x="26" y="18" width="6" height="2" rx="0.5" fill="#18181b"/><rect x="26" y="23" width="6" height="2" rx="0.5" fill="#18181b"/></svg> کانبان دسکتاپ</div>
+        <p>ابزار مدیریت کار و زمان شخصی — کاملاً آفلاین، کاملاً فارسی، کاملاً متعلق به شما.</p>
+      </div>
+      <div class="footer-col">
+        <h4>محصول</h4>
+        <a href="#features">ویژگی‌ها</a>
+        <a href="#pricing">قیمت‌گذاری</a>
+        <a href="user-guide.html">راهنمای کاربر</a>
+        <a href="#">تغییرات نسخه</a>
+      </div>
+      <div class="footer-col">
+        <h4>حساب کاربری</h4>
+        <a href="/login">ورود</a>
+        <a href="/login">خرید لایسنس</a>
+        <a href="/login">تاریخچه فعال‌سازی</a>
+      </div>
+      <div class="footer-col">
+        <h4>پشتیبانی</h4>
+        <a href="/login">تیکت پشتیبانی</a>
+        <a href="https://github.com/behroozsheikhan/kanban-desktop">وبسایت</a>
+        <a href="https://github.com/behroozsheikhan/kanban-desktop/issues">GitHub Issues</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© ۱۴۰۵ کانبان دسکتاپ — بهروز شیخان</span>
+      <span>v2.0.0</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// FAQ
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// Heatmap
+const grid = document.getElementById('heatmapGrid');
+const intensities = [0,0,1,2,3,2,1,0,2,3,3,1,0,1,2,3,2,3,1,0,0,1,3,3,2,1,0,2,3,2,1,2,3,3,2,1,0,1,2,1];
+const colors = ['#f4f4f5','#d4f7ed','#00c8a066','#00c8a0aa','#00c8a0'];
+intensities.forEach(v => {
+  const cell = document.createElement('div');
+  cell.className = 'hm-cell';
+  cell.style.background = colors[v];
+  grid.appendChild(cell);
+});
+
+// Theme toggle
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+// Load saved theme
+const saved = localStorage.getItem('theme');
+if (saved === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  document.getElementById('themeBtn').textContent = '☀️';
+}
+
+// Navbar scroll
+window.addEventListener('scroll', () => {
+  document.querySelector('.navbar').style.boxShadow =
+    window.scrollY > 10 ? '0 4px 20px rgba(0,0,0,0.08)' : 'none';
+});
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1d9e33adb3f8a18',t:'MTc4NDQ2NTgwMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
