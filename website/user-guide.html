@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>راهنمای کاربر — کانبان دسکتاپ v2.0</title>
+<title>راهنمای کاربر — کانبان دسکتاپ v2.1</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
@@ -260,7 +260,7 @@ code { background: var(--gray100); border: 1px solid var(--gray200); border-radi
   <!-- content -->
   <main class="content">
     <div class="content-header">
-      <div class="version-badge">v2.0.0</div>
+      <div class="version-badge">v2.1.0</div>
       <h1>📋 راهنمای کاربر کانبان دسکتاپ</h1>
       <p>راهنمای کامل استفاده از تمام امکانات نرم‌افزار</p>
     </div>
@@ -392,12 +392,27 @@ code { background: var(--gray100); border: 1px solid var(--gray200); border-radi
         <tr><td>فایل</td><td>فایل‌های مرتبط — با کلیک در Explorer نشان داده می‌شود</td></tr>
         <tr><td>لینک</td><td>URL — با کلیک کپی می‌شود</td></tr>
       </table>
+      <h3>علامت‌گذاری کارت به عنوان انجام‌شده</h3>
+      <p>در نمای شبکه‌ای (grid)، هر کارت یک چک‌باکس در گوشه پایین-چپ دارد که با hover ظاهر می‌شود. با تیک زدن آن:</p>
+      <ul>
+        <li>کارت با شفافیت کمتر (کمرنگ‌تر) نمایش داده می‌شود تا از کارت‌های فعال متمایز باشد</li>
+        <li>وضعیت done هنگام ویرایش کارت حفظ می‌شود</li>
+      </ul>
+      <h3>فیلتر نمایش کارت‌ها</h3>
+      <p>در نوار بالای بورد، منوی «نمایش» سه حالت دارد:</p>
+      <table class="doc-table">
+        <tr><th>گزینه</th><th>نمایش</th></tr>
+        <tr><td>همه</td><td>تمام کارت‌ها</td></tr>
+        <tr><td>تیک دارد</td><td>فقط کارت‌های انجام‌شده</td></tr>
+        <tr><td>تیک ندارد</td><td>فقط کارت‌های ناتمام</td></tr>
+      </table>
       <h3>جابجایی کارت‌ها</h3>
       <div class="steps-list">
         <div class="step-item"><div class="step-num">۱</div><div class="step-content"><strong>حالت جابجایی را فعال کنید</strong><span>روی دکمه 🔀 جابجایی کلیک کنید (نارنجی می‌شود)</span></div></div>
         <div class="step-item"><div class="step-num">۲</div><div class="step-content"><strong>کارت مبدأ را انتخاب کنید</strong><span>کلیک کنید — border طلایی نشان داده می‌شود</span></div></div>
         <div class="step-item"><div class="step-num">۳</div><div class="step-content"><strong>کارت مقصد را کلیک کنید</strong><span>جابجایی فوری انجام می‌شود</span></div></div>
       </div>
+      <div class="tip"><span class="tip-icon">💡</span><span>از بورد طوفان فکری برای ذخیره ایده‌های اولیه استفاده کنید و پس از بررسی، ایده‌های تأیید شده را با چک‌باکس علامت‌گذاری کنید.</span></div>
     </section>
 
     <!-- ۷ آمار -->
@@ -443,8 +458,22 @@ code { background: var(--gray100); border: 1px solid var(--gray200); border-radi
       <h2>💾 ۱۰. خروجی و پشتیبان‌گیری</h2>
       <h3>Export پروژه <span style="font-size:11px;background:var(--yellow);border:1px solid #18181b;border-radius:4px;padding:1px 8px;color:#18181b;font-weight:700;">پرو</span></h3>
       <p>از صفحه اصلی روی آیکون Export کلیک کنید. فایل JSON کامل پروژه ذخیره می‌شود.</p>
-      <h3>Import پروژه <span style="font-size:11px;background:var(--yellow);border:1px solid #18181b;border-radius:4px;padding:1px 8px;color:#18181b;font-weight:700;">پرو</span></h3>
-      <p>دکمه Import در صفحه اصلی — فایل JSON را انتخاب کنید تا به لیست پروژه‌ها اضافه شود.</p>
+      <h3>وارد کردن پشتیبان <span style="font-size:11px;background:var(--yellow);border:1px solid #18181b;border-radius:4px;padding:1px 8px;color:#18181b;font-weight:700;">پرو</span></h3>
+      <p>دکمه «وارد کردن» در صفحه اصلی — فرآیند در دو مرحله انجام می‌شود:</p>
+      <div class="steps-list">
+        <div class="step-item"><div class="step-num">۱</div><div class="step-content"><strong>پنجره راهنما</strong><span>هشدار جایگزینی کامل داده‌ها نمایش داده می‌شود — روی «انتخاب فایل» کلیک کنید</span></div></div>
+        <div class="step-item"><div class="step-num">۲</div><div class="step-content"><strong>تحلیل خودکار و تأیید</strong><span>برنامه فایل را با داده‌های فعلی مقایسه می‌کند و نتیجه را نشان می‌دهد</span></div></div>
+      </div>
+      <h3>وضعیت‌های تحلیل فایل</h3>
+      <table class="doc-table">
+        <tr><th>وضعیت</th><th>معنا</th><th>رنگ هشدار</th></tr>
+        <tr><td>🟢 جدیدتر</td><td>فایل ورودی نسبت به داده‌های فعلی جدیدتر است</td><td>سبز</td></tr>
+        <tr><td>🟠 قدیمی‌تر</td><td>فایل ورودی قدیمی‌تر از داده‌های فعلی است — احتیاط کنید</td><td>نارنجی</td></tr>
+        <tr><td>🔵 مشابه</td><td>محتوا و تاریخ بسیار نزدیک به داده‌های فعلی است</td><td>آبی</td></tr>
+        <tr><td>🔴 متفاوت</td><td>کمتر از ۲۰٪ اشتراک — احتمالاً از نصب دیگری است</td><td>قرمز</td></tr>
+      </table>
+      <p>در پنجره تحلیل، جدول مقایسه آماری (تعداد پروژه، کار، فاز، کارت ایده و بازه‌های تایمر) و لیست پروژه‌های منحصربه‌فرد نمایش داده می‌شود. پس از بررسی، با دکمه «تأیید و وارد کردن» عملیات انجام می‌شود.</p>
+      <div class="note"><span class="note-icon">⚠️</span><span>وارد کردن، <strong>تمام داده‌های فعلی را جایگزین می‌کند</strong> و قابل بازگشت نیست. قبل از وارد کردن، یک خروجی از داده‌های فعلی بگیرید.</span></div>
       <h3>خروجی برای AI <span style="font-size:11px;background:var(--yellow);border:1px solid #18181b;border-radius:4px;padding:1px 8px;color:#18181b;font-weight:700;">پرو</span></h3>
       <p>آیکون 🤖 در صفحه اصلی — پروژه‌های مورد نظر را انتخاب کنید و فرمت (JSON یا Markdown) را مشخص کنید.</p>
       <div class="note"><span class="note-icon">⚠️</span><span>داده‌ها کاملاً محلی هستند. هیچ اطلاعاتی به اینترنت ارسال نمی‌شود.</span></div>
@@ -484,7 +513,7 @@ code { background: var(--gray100); border: 1px solid var(--gray200); border-radi
       <a href="index.html#pricing" style="color:#71717a;text-decoration:none;" onmouseover="this.style.color='#ffbe1a'" onmouseout="this.style.color='#71717a'">قیمت‌گذاری</a>
       <a href="https://github.com/behroozsheikhan/kanban-desktop/issues" style="color:#71717a;text-decoration:none;" onmouseover="this.style.color='#ffbe1a'" onmouseout="this.style.color='#71717a'">GitHub</a>
     </div>
-    <span>v2.0.0</span>
+    <span>v2.1.0</span>
   </div>
 </footer>
 
@@ -522,6 +551,5 @@ window.addEventListener('scroll', () => {
     window.scrollY > 10 ? '0 4px 20px rgba(0,0,0,0.08)' : 'none';
 });
 </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1dbbb102a2d5868',t:'MTc4NDQ4NTEyNw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1e3f9e86a2213b8',t:'MTc4NDU3MTU4Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
