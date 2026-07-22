@@ -170,14 +170,60 @@ footer { background: #0f0f11; color: #f4f4f5; border-top: 2px solid #27272a; pad
   <div class="timeline">
 
 
-    <!-- v2.1.1 -->
+    <!-- v2.1.2 -->
     <div class="release">
       <div class="release-dot" style="background:#ffbe1a;">🆕</div>
       <div class="release-card">
         <div class="release-header">
           <div class="release-meta">
-            <span class="release-version">v2.1.1</span>
+            <span class="release-version">v2.1.2</span>
             <span class="release-badge" style="background:#ffbe1a;">آخرین نسخه</span>
+          </div>
+          <span class="release-date">مرداد ۱۴۰۵</span>
+        </div>
+        <div class="release-body">
+          <div class="release-summary">
+            بهبودهای تجربه کاربری در بورد طوفان فکری و بورد کانبان: پاپ‌آپ نمایش محتوا، پنهان‌سازی خودکار هدر، رفع اشکالات نمایش لیست و خط جدید در Markdown.
+          </div>
+
+          <div class="change-group">
+            <div class="change-group-title">
+              <div class="change-group-icon" style="background:#f0fdf4;">✨</div>
+              ویژگی‌های جدید
+            </div>
+            <div class="change-list">
+              <div class="change-item"><span class="change-tag tag-new">جدید</span>پاپ‌آپ نمایش محتوای کارت — کلیک روی متن کارت، محتوای Markdown را در یک پاپ‌آپ مجزا نشان می‌دهد</div>
+              <div class="change-item"><span class="change-tag tag-new">جدید</span>پاپ‌آپ محتوا: header ثابت (عنوان، دسته‌بندی، برچسب) و scroll داخلی فقط برای متن</div>
+              <div class="change-item"><span class="change-tag tag-new">جدید</span>تنظیم پنهان‌سازی خودکار هدر در تنظیمات بورد — سه حالت: غیرفعال / کل هدر / فقط دکمه‌ها</div>
+              <div class="change-item"><span class="change-tag tag-new">جدید</span>پنهان‌سازی کل هدر: با slide-up پنهان، با حرکت موس به لبه بالا ظاهر می‌شود</div>
+              <div class="change-item"><span class="change-tag tag-new">جدید</span>پنهان‌سازی دکمه‌های ناوبری: fade-out دکمه‌ها، دکمه برگشت همیشه نمایش داده می‌شود</div>
+            </div>
+          </div>
+
+          <div class="change-group">
+            <div class="change-group-title">
+              <div class="change-group-icon" style="background:#fef2f2;">🐛</div>
+              رفع اشکال
+            </div>
+            <div class="change-list">
+              <div class="change-item"><span class="change-tag tag-fix">رفع</span>لیست‌های Markdown (ul/ol) در پیش‌نمایش و expand کارت نمایش داده نمی‌شدند</div>
+              <div class="change-item"><span class="change-tag tag-fix">رفع</span>کلیک روی متن کوتاه کارت expand نمی‌شد — اکنون هر محتوایی قابل کلیک است</div>
+              <div class="change-item"><span class="change-tag tag-fix">رفع</span>خط جدید (Enter) در نمایش Markdown رعایت نمی‌شد — با فعال‌سازی breaks:true رفع شد</div>
+              <div class="change-item"><span class="change-tag tag-fix">رفع</span>scroll صفحه پشت modal‌های طوفان فکری هنگام چرخاندن موس</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- v2.1.1 -->
+    <div class="release">
+      <div class="release-dot" style="background:#a1a1aa;">🏷</div>
+      <div class="release-card">
+        <div class="release-header">
+          <div class="release-meta">
+            <span class="release-version">v2.1.1</span>
           </div>
           <span class="release-date">مرداد ۱۴۰۵</span>
         </div>
@@ -404,9 +450,7 @@ footer { background: #0f0f11; color: #f4f4f5; border-top: 2px solid #27272a; pad
     <div style="display:flex;gap:20px;">
       <a href="index.html">صفحه اصلی</a>
       <a href="user-guide.html">راهنما</a>
-      <a href="https://github.com/behroozsheikhan/kanban-desktop/issues">GitHub Issues</a>
     </div>
-    <span>v2.1.1</span>
   </div>
 </footer>
 
@@ -427,6 +471,5 @@ window.addEventListener('scroll', () => {
     window.scrollY > 10 ? '0 4px 20px rgba(0,0,0,0.08)' : 'none';
 });
 </script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1f22f513f841313',t:'MTc4NDcyMDU3Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

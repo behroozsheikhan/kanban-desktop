@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>راهنمای کاربر — کانبان دسکتاپ v2.1</title>
+<title>راهنمای کاربر — کانبان دسکتاپ v2.1.2</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
@@ -55,8 +55,6 @@ body {
   transition: background 0.2s, color 0.2s;
 }
 a { color: inherit; text-decoration: none; }
-
-/* ── NAVBAR (دقیقاً مثل index.html) ── */
 .navbar {
   position: sticky; top: 0; z-index: 100;
   background: var(--nav-bg); border-bottom: 2.5px solid var(--black);
@@ -92,12 +90,8 @@ a { color: inherit; text-decoration: none; }
   box-shadow: var(--shadow-sm); transition: all 0.15s;
 }
 .theme-btn:hover { background: var(--gray200); }
-
-/* ── LAYOUT ── */
 .page-wrap { max-width: 1140px; margin: 0 auto; padding: 40px 24px 80px; display: grid; grid-template-columns: 240px 1fr; gap: 36px; align-items: start; }
-
-/* ── SIDEBAR ── */
-.sidebar { position: sticky; top: 82px; }
+.sidebar { position: sticky; top: 82px; max-height: calc(100vh - 100px); overflow-y: auto; }
 .sidebar-title { font-size: 11px; font-weight: 900; color: var(--gray400); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; padding: 0 8px; }
 .sidebar-nav { display: flex; flex-direction: column; gap: 2px; }
 .sidebar-nav a {
@@ -111,8 +105,6 @@ a { color: inherit; text-decoration: none; }
   border-color: #18181b; box-shadow: 2px 2px 0 #18181b;
 }
 .sidebar-nav a .icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
-
-/* ── CONTENT ── */
 .content { min-width: 0; }
 .content-header { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2.5px solid var(--black); }
 .content-header h1 { font-size: 28px; font-weight: 900; margin-bottom: 8px; }
@@ -122,25 +114,24 @@ a { color: inherit; text-decoration: none; }
   border-radius: 6px; padding: 2px 12px; font-size: 11px; font-weight: 900;
   margin-bottom: 10px; color: #18181b; box-shadow: 2px 2px 0 #18181b;
 }
-
-/* ── SECTIONS ── */
-.doc-section { margin-bottom: 48px; scroll-margin-top: 90px; }
+.doc-section { margin-bottom: 56px; scroll-margin-top: 90px; }
 .doc-section h2 {
-  font-size: 20px; font-weight: 900; margin-bottom: 16px;
-  padding: 10px 18px; background: var(--yellow); border: 2.5px solid #18181b;
+  font-size: 20px; font-weight: 900; margin-bottom: 20px;
+  padding: 12px 18px; background: var(--yellow); border: 2.5px solid #18181b;
   border-radius: 10px; display: flex; align-items: center; gap: 10px;
   color: #18181b; box-shadow: var(--shadow-sm);
 }
 .doc-section h3 {
-  font-size: 15px; font-weight: 800; margin: 20px 0 8px;
+  font-size: 15px; font-weight: 800; margin: 24px 0 10px;
   border-right: 4px solid var(--yellow); padding-right: 10px; color: var(--text);
+}
+.doc-section h4 {
+  font-size: 13px; font-weight: 800; margin: 16px 0 6px; color: var(--text);
 }
 .doc-section p { font-size: 14px; color: var(--gray600); margin: 8px 0; line-height: 1.9; }
 .doc-section ul, .doc-section ol { padding-right: 22px; margin: 8px 0; }
 .doc-section li { font-size: 14px; color: var(--gray600); margin: 5px 0; line-height: 1.8; }
 .doc-section li strong { color: var(--text); }
-
-/* ── CARDS (tip/note) ── */
 .tip {
   background: #f0fdf4; border: 1.5px solid var(--green);
   border-radius: 10px; padding: 12px 16px; margin: 14px 0; font-size: 13px; color: #166534;
@@ -155,15 +146,18 @@ a { color: inherit; text-decoration: none; }
 }
 [data-theme="dark"] .note { background: #1c1500; color: #fcd34d; }
 .note .note-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-
-/* ── TABLE ── */
+.warn {
+  background: #fff1f2; border: 1.5px solid #ff2d6f;
+  border-radius: 10px; padding: 12px 16px; margin: 14px 0; font-size: 13px; color: #9f1239;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+[data-theme="dark"] .warn { background: #2b0d0d; color: #fca5a5; }
+.warn .warn-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
 .doc-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; border: 2px solid var(--black); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow-sm); }
 .doc-table th { background: var(--yellow); color: #18181b; padding: 10px 14px; text-align: right; font-weight: 900; border-bottom: 2px solid #18181b; }
 .doc-table td { padding: 9px 14px; border-bottom: 1px solid var(--gray200); color: var(--gray600); }
 .doc-table tr:last-child td { border-bottom: none; }
 .doc-table tr:nth-child(even) td { background: var(--gray50); }
-
-/* ── STEPS ── */
 .steps-list { display: flex; flex-direction: column; gap: 12px; margin: 12px 0; }
 .step-item {
   display: flex; gap: 14px; align-items: flex-start;
@@ -177,12 +171,8 @@ a { color: inherit; text-decoration: none; }
 }
 .step-content strong { display: block; font-size: 14px; font-weight: 800; margin-bottom: 3px; color: var(--text); }
 .step-content span { font-size: 13px; color: var(--gray600); }
-
-/* ── kbd/code ── */
 kbd { background: var(--gray100); border: 1.5px solid var(--gray200); border-radius: 4px; padding: 2px 8px; font-family: monospace; font-size: 12px; direction: ltr; display: inline-block; color: var(--text); }
 code { background: var(--gray100); border: 1px solid var(--gray200); border-radius: 4px; padding: 1px 6px; font-family: monospace; font-size: 12px; direction: ltr; display: inline-block; color: var(--text); }
-
-/* ── SHORTCUTS TABLE ── */
 .shortcuts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
 .shortcut-item {
   display: flex; align-items: center; justify-content: space-between;
@@ -191,8 +181,8 @@ code { background: var(--gray100); border: 1px solid var(--gray200); border-radi
   font-size: 13px;
 }
 .shortcut-item .label { color: var(--gray600); }
-
-/* ── RESPONSIVE ── */
+/* badge pro */
+.pro-badge { font-size:11px;background:var(--yellow);border:1px solid #18181b;border-radius:4px;padding:1px 8px;color:#18181b;font-weight:700; }
 @media (max-width: 800px) {
   .page-wrap { grid-template-columns: 1fr; }
   .sidebar { position: static; display: none; }
@@ -202,7 +192,6 @@ code { background: var(--gray100); border: 1px solid var(--gray200); border-radi
 </head>
 <body>
 
-<!-- ── NAVBAR (دقیقاً مثل index.html) ── -->
 <header class="navbar">
   <div class="inner">
     <a href="index.html" class="logo">
@@ -225,8 +214,8 @@ code { background: var(--gray100); border: 1px solid var(--gray200); border-radi
       <span>کانبان دسکتاپ</span>
     </a>
     <nav>
-      <a href="index.html#features" class="hide-mobile">ویژگی‌ها</a>
-      <a href="index.html#pricing" class="hide-mobile">قیمت‌گذاری</a>
+      <a href="index.html#features">ویژگی‌ها</a>
+      <a href="index.html#pricing">قیمت‌گذاری</a>
       <a href="user-guide.html" class="active">راهنما</a>
       <a href="changelog.html">تغییرات نسخه</a>
       <a href="/login" class="btn btn-outline">ورود به حساب</a>
@@ -236,129 +225,171 @@ code { background: var(--gray100); border: 1px solid var(--gray200); border-radi
   </div>
 </header>
 
-<!-- ── PAGE ── -->
 <div class="page-wrap">
-
-  <!-- sidebar -->
+  <!-- Sidebar -->
   <aside class="sidebar">
-    <div class="sidebar-title">راهنمای کاربر</div>
+    <div class="sidebar-title">فهرست مطالب</div>
     <nav class="sidebar-nav">
-      <a href="#start" class="icon">🚀<span>شروع سریع</span></a>
-      <a href="#projects"><span class="icon">🗂</span>مدیریت پروژه‌ها</a>
-      <a href="#kanban"><span class="icon">📌</span>بورد کانبان</a>
-      <a href="#timer"><span class="icon">⏱</span>ردیابی زمان</a>
-      <a href="#gantt"><span class="icon">📊</span>تایم‌لاین (Gantt)</a>
-      <a href="#brainstorm"><span class="icon">🧠</span>بورد طوفان فکری</a>
-      <a href="#stats"><span class="icon">📈</span>داشبورد آمار</a>
-      <a href="#archive"><span class="icon">🗄</span>آرشیو</a>
-      <a href="#settings"><span class="icon">⚙️</span>تنظیمات</a>
-      <a href="#export"><span class="icon">💾</span>خروجی و پشتیبان‌گیری</a>
-      <a href="#tips"><span class="icon">💡</span>نکات حرفه‌ای</a>
+      <a href="#start"><span class="icon">🚀</span> شروع سریع</a>
+      <a href="#projects"><span class="icon">🗂</span> مدیریت پروژه‌ها</a>
+      <a href="#kanban"><span class="icon">📌</span> بورد کانبان</a>
+      <a href="#tasks"><span class="icon">✅</span> مدیریت کارها</a>
+      <a href="#timer"><span class="icon">⏱</span> ردیابی زمان</a>
+      <a href="#gantt"><span class="icon">📊</span> تایم‌لاین Gantt</a>
+      <a href="#brainstorm"><span class="icon">🧠</span> بورد طوفان فکری</a>
+      <a href="#stats"><span class="icon">📈</span> داشبورد آمار</a>
+      <a href="#archive"><span class="icon">🗄</span> آرشیو</a>
+      <a href="#settings"><span class="icon">⚙️</span> تنظیمات بورد</a>
+      <a href="#export"><span class="icon">💾</span> پشتیبان‌گیری</a>
+      <a href="#tips"><span class="icon">💡</span> نکات حرفه‌ای</a>
     </nav>
   </aside>
 
-  <!-- content -->
+  <!-- Content -->
   <main class="content">
     <div class="content-header">
-      <div class="version-badge">v2.1.0</div>
-      <h1>📋 راهنمای کاربر کانبان دسکتاپ</h1>
-      <p>راهنمای کامل استفاده از تمام امکانات نرم‌افزار</p>
-    </div>
+      <div class="version-badge">v2.1.2</div>
+      <h1>راهنمای کاربر کانبان دسکتاپ</h1>
+      <p>راهنمای جامع استفاده از تمام امکانات نرم‌افزار مدیریت کار و زمان شخصی</p>
 
     <!-- ۱ شروع سریع -->
     <section class="doc-section" id="start">
       <h2>🚀 ۱. شروع سریع</h2>
-      <p>کانبان دسکتاپ یک ابزار مدیریت کار و زمان شخصی است که کاملاً آفلاین کار می‌کند. هیچ اتصال اینترنتی یا حساب کاربری نیاز ندارد.</p>
+      <p>پس از نصب و اجرای نرم‌افزار، صفحه اصلی لیست پروژه‌های شما را نشان می‌دهد. برای شروع کافی است یک پروژه جدید بسازید.</p>
 
-      <h3>اولین پروژه</h3>
       <div class="steps-list">
-        <div class="step-item"><div class="step-num">۱</div><div class="step-content"><strong>پروژه جدید بسازید</strong><span>روی دکمه «+ پروژه جدید» در صفحه اصلی کلیک کنید</span></div></div>
-        <div class="step-item"><div class="step-num">۲</div><div class="step-content"><strong>نام و توضیحات وارد کنید</strong><span>عنوان پروژه اجباری است، توضیحات اختیاری</span></div></div>
-        <div class="step-item"><div class="step-num">۳</div><div class="step-content"><strong>ذخیره کنید</strong><span>روی «ذخیره» کلیک کنید تا پروژه ایجاد شود</span></div></div>
-        <div class="step-item"><div class="step-num">۴</div><div class="step-content"><strong>وارد پروژه شوید</strong><span>روی «باز کردن» کلیک کنید تا بورد کانبان باز شود</span></div></div>
+        <div class="step-item"><div class="step-num">۱</div><div class="step-content"><strong>پروژه جدید بسازید</strong><span>روی دکمه «+ پروژه جدید» کلیک کنید، نام و توضیحات را وارد کنید</span></div></div>
+        <div class="step-item"><div class="step-num">۲</div><div class="step-content"><strong>وارد پروژه شوید</strong><span>روی کارت پروژه کلیک کنید تا وارد بورد کانبان شوید</span></div></div>
+        <div class="step-item"><div class="step-num">۳</div><div class="step-content"><strong>اولین کار را اضافه کنید</strong><span>روی «+ کار جدید» در هر ستون کلیک کنید</span></div></div>
+        <div class="step-item"><div class="step-num">۴</div><div class="step-content"><strong>تایمر را شروع کنید</strong><span>روی آیکون ⏱ در کارت کلیک کنید تا زمان کار ثبت شود</span></div></div>
       </div>
-
-      <h3>بارگذاری داده‌های نمونه</h3>
-      <p>برای آشنایی سریع، فایل <code>kanban-sample-data.json</code> را از طریق دکمه <strong>Import</strong> در صفحه اول بارگذاری کنید. این فایل شامل دو پروژه کامل نمونه است.</p>
-      <div class="tip"><span class="tip-icon">💡</span><span>داده‌های نمونه شامل کارهای کامل‌شده، تایمر، آرشیو و بورد طوفان فکری است — بهترین راه برای درک امکانات نرم‌افزار.</span></div>
+      <div class="tip"><span class="tip-icon">💡</span><span>نرم‌افزار کاملاً آفلاین است. هیچ نیازی به اینترنت ندارد و تمام داده‌ها روی کامپیوتر شما ذخیره می‌شوند.</span></div>
     </section>
 
-    <!-- ۲ پروژه‌ها -->
+    <!-- ۲ مدیریت پروژه‌ها -->
     <section class="doc-section" id="projects">
       <h2>🗂 ۲. مدیریت پروژه‌ها</h2>
-      <p>صفحه اصلی تمام پروژه‌های شما را نمایش می‌دهد.</p>
+      <p>صفحه اصلی مرکز مدیریت همه پروژه‌های شماست. پروژه‌های فعال و پایان‌یافته به صورت جداگانه نمایش داده می‌شوند.</p>
+
+      <h3>امکانات کارت پروژه</h3>
       <table class="doc-table">
-        <tr><th>عملیات</th><th>توضیح</th></tr>
-        <tr><td>✏️ ویرایش</td><td>تغییر نام و توضیحات پروژه</td></tr>
-        <tr><td>🗑️ حذف</td><td>حذف دائم پروژه و تمام داده‌های آن</td></tr>
-        <tr><td>✅ کامل‌شده</td><td>علامت‌گذاری پروژه به عنوان پایان‌یافته</td></tr>
-        <tr><td>📤 Export</td><td>خروجی JSON کامل پروژه (نسخه پرو)</td></tr>
-        <tr><td>🤖 خروجی AI</td><td>خروجی JSON/MD برای ابزارهای هوش مصنوعی (نسخه پرو)</td></tr>
+        <tr><th>عملیات</th><th>روش</th></tr>
+        <tr><td>ورود به پروژه</td><td>کلیک روی کارت پروژه</td></tr>
+        <tr><td>ویرایش نام/توضیحات</td><td>آیکون ✏️ در کارت</td></tr>
+        <tr><td>حذف پروژه</td><td>آیکون 🗑️ — نیاز به تأیید</td></tr>
+        <tr><td>پایان‌یافته علامت‌گذاری</td><td>آیکون ✅ — پروژه به بخش پایان‌یافته منتقل می‌شود</td></tr>
+        <tr><td>مرتب‌سازی</td><td>منوی «مرتب‌سازی» — بر اساس جدیدترین، قدیمی‌ترین، نام، پیشرفت، زمان</td></tr>
+        <tr><td>جستجو</td><td>کادر 🔍 — جستجو در نام و توضیحات پروژه</td></tr>
       </table>
-      <h3>فیلتر و مرتب‌سازی</h3>
-      <ul>
-        <li><strong>همه / فعال / پایان‌یافته:</strong> فیلتر بر اساس وضعیت پروژه</li>
-        <li><strong>مرتب‌سازی:</strong> بر اساس تاریخ ایجاد یا آخرین بازدید</li>
-        <li><strong>جستجو:</strong> جستجو در نام پروژه‌ها</li>
-      </ul>
+
+      <h3>محدودیت‌ها</h3>
+      <table class="doc-table">
+        <tr><th>پلن</th><th>تعداد پروژه</th></tr>
+        <tr><td>پایه (رایگان)</td><td>حداکثر ۵ پروژه</td></tr>
+        <tr><td>پرو</td><td>نامحدود</td></tr>
+      </table>
+
+      <h3>پشتیبان‌گیری و بازیابی <span class="pro-badge">پرو</span></h3>
+      <p>از دکمه‌های «خروجی» و «وارد کردن» در نوار بالا برای تهیه نسخه پشتیبان یا انتقال داده‌ها به کامپیوتر دیگر استفاده کنید.</p>
     </section>
 
-    <!-- ۳ کانبان -->
+    <!-- ۳ بورد کانبان -->
     <section class="doc-section" id="kanban">
       <h2>📌 ۳. بورد کانبان</h2>
-      <p>قلب اصلی نرم‌افزار برای مدیریت کارها با رابط بصری Drag & Drop.</p>
+      <p>بورد کانبان هسته اصلی نرم‌افزار است. کارها در چهار ستون پیش‌فرض سازماندهی می‌شوند و با Drag & Drop جابجا می‌شوند.</p>
+
+      <h3>ستون‌های پیش‌فرض</h3>
       <table class="doc-table">
-        <tr><th>ستون</th><th>معنی</th></tr>
-        <tr><td>انجام نشده</td><td>کارهایی که هنوز شروع نشده‌اند</td></tr>
-        <tr><td>در حال انجام</td><td>کارهای جاری — تاریخ شروع ثبت می‌شود</td></tr>
-        <tr><td>در بازبینی</td><td>کارهای آماده برای بررسی</td></tr>
-        <tr><td>انجام شده</td><td>کارهای کامل‌شده — تاریخ پایان ثبت می‌شود</td></tr>
+        <tr><th>ستون</th><th>کاربرد</th><th>رنگ</th></tr>
+        <tr><td>لیست کارها</td><td>کارهای منتظر شروع</td><td>🔴 صورتی</td></tr>
+        <tr><td>در حال انجام</td><td>کارهایی که روی آن‌ها کار می‌کنید</td><td>🟡 زرد</td></tr>
+        <tr><td>در حال بررسی</td><td>کارهای آماده review</td><td>🔵 آبی</td></tr>
+        <tr><td>انجام‌شده</td><td>کارهای تمام‌شده</td><td>🟢 سبز</td></tr>
       </table>
-      <h3>ایجاد کار جدید</h3>
-      <p>روی <strong>+ کار جدید</strong> کلیک کنید. در پنجره ایجاد کار:</p>
-      <ul>
-        <li><strong>عنوان و توضیحات</strong> — با ویرایشگر متن غنی</li>
-        <li><strong>اولویت</strong> — فوری، بالا، متوسط، پایین</li>
-        <li><strong>دسته‌بندی و برچسب</strong> — از تنظیمات بورد قابل تنظیم</li>
-        <li><strong>زمان تخمینی</strong> — برای مقایسه با زمان واقعی</li>
-        <li><strong>سررسید</strong> — تاریخ deadline</li>
-        <li><strong>وابستگی</strong> — پیش‌نیازهای کار</li>
-        <li><strong>فاز</strong> — دسته‌بندی در فازهای پروژه</li>
-      </ul>
-      <div class="tip"><span class="tip-icon">💡</span><span>وقتی کاری به «در حال انجام» منتقل می‌شود، تاریخ شروع ثبت می‌شود. وقتی به «انجام شده» می‌رود، تاریخ پایان ثبت می‌شود.</span></div>
-      <h3>یادداشت پایانی (Post-Mortem)</h3>
-      <p>بعد از اتمام کار، می‌توانید یادداشتی درباره آموخته‌ها و مشکلات ثبت کنید. این یادداشت‌ها در بخش آمار قابل مشاهده است.</p>
+
+      <h3>Drag & Drop</h3>
+      <p>کارها را بین ستون‌ها بکشید. هنگام جابجایی، تاریخچه وضعیت کار ثبت می‌شود و در داشبورد آمار قابل مشاهده است.</p>
+      <div class="tip"><span class="tip-icon">💡</span><span>با رفتن کار به ستون «در حال انجام»، تاریخ شروع آن ثبت شده و در Gantt Chart نمایش داده می‌شود.</span></div>
+
+      <h3>نوار هدر بورد</h3>
+      <p>هدر بورد شامل ناوبری بین بخش‌های مختلف پروژه است:</p>
+      <table class="doc-table">
+        <tr><th>دکمه</th><th>عملکرد</th></tr>
+        <tr><td>← برگشت</td><td>بازگشت به لیست پروژه‌ها</td></tr>
+        <tr><td>بورد کانبان</td><td>نمایش ستون‌های کانبان</td></tr>
+        <tr><td>🧠 بورد طوفان فکری</td><td>ورود به بورد ایده‌ها</td></tr>
+        <tr><td>تایم‌لاین</td><td>نمودار Gantt</td></tr>
+        <tr><td>آمار و نمودار</td><td>داشبورد آمار عملکرد</td></tr>
+        <tr><td>تنظیمات</td><td>پیکربندی بورد</td></tr>
+        <tr><td>آرشیو</td><td>کارهای آرشیوشده</td></tr>
+      </table>
+      <div class="note"><span class="note-icon">💡</span><span>هدر می‌تواند پس از چند ثانیه به صورت خودکار پنهان شود. این رفتار در تنظیمات بورد قابل تغییر است.</span></div>
     </section>
 
-    <!-- ۴ تایمر -->
+    <!-- ۴ مدیریت کارها -->
+    <section class="doc-section" id="tasks">
+      <h2>✅ ۴. مدیریت کارها</h2>
+      <p>هر کار (Task) می‌تواند اطلاعات کاملی داشته باشد. با کلیک روی کارت یا دکمه «+ کار جدید» می‌توانید کار ایجاد یا ویرایش کنید.</p>
+
+      <h3>فیلدهای کار</h3>
+      <table class="doc-table">
+        <tr><th>فیلد</th><th>توضیح</th><th>اجباری</th></tr>
+        <tr><td>عنوان</td><td>نام کار</td><td>✅</td></tr>
+        <tr><td>اولویت</td><td>فوری / بالا / متوسط / کم</td><td>❌</td></tr>
+        <tr><td>دسته‌بندی (نوع)</td><td>قابلیت، باگ، بهبود، تحقیق، طراحی...</td><td>❌</td></tr>
+        <tr><td>برچسب‌ها</td><td>برچسب‌های چندتایی رنگی سفارشی</td><td>❌</td></tr>
+        <tr><td>سررسید</td><td>تاریخ مهلت انجام کار</td><td>❌</td></tr>
+        <tr><td>زمان تخمینی</td><td>برآورد زمان انجام (دقیقه)</td><td>❌</td></tr>
+        <tr><td>فاز</td><td>انتساب به فاز پروژه</td><td>❌</td></tr>
+        <tr><td>توضیحات</td><td>متن آزاد با قالب‌بندی</td><td>❌</td></tr>
+        <tr><td>وابستگی‌ها</td><td>کارهایی که این کار منتظر آن‌هاست</td><td>❌</td></tr>
+        <tr><td>ترتیب اجرا</td><td>شماره اجرا برای برنامه‌ریزی توالی</td><td>❌</td></tr>
+        <tr><td>یادداشت پایانی</td><td>ثبت تجربه پس از اتمام کار</td><td>❌</td></tr>
+      </table>
+
+      <h3>وابستگی‌های کار (Dependencies)</h3>
+      <p>می‌توانید مشخص کنید که یک کار تا تمام نشدن کار دیگری نباید شروع شود. کارهایی که منتظر کار دیگری هستند با نشانه «مسدود» نمایش داده می‌شوند.</p>
+
+      <h3>ترتیب اجرا</h3>
+      <p>با تعیین شماره ترتیب برای کارها، می‌توانید توالی اجرای برنامه‌ریزی‌شده را در نمای «ترتیب اجرا» مشاهده کنید.</p>
+
+      <h3>یادداشت پایانی (Post-Mortem)</h3>
+      <p>پس از اتمام کار، می‌توانید یادداشت پایانی ثبت کنید. این یادداشت‌ها در آرشیو نمایش داده شده و برای بررسی و یادگیری از تجربیات مفید هستند.</p>
+    </section>
+
+    <!-- ۵ ردیابی زمان -->
     <section class="doc-section" id="timer">
-      <h2>⏱ ۴. ردیابی زمان و تایمر</h2>
-      <p>هر کار دارای تایمر داخلی است که بازه‌های کاری را ثبت می‌کند.</p>
+      <h2>⏱ ۵. ردیابی زمان و تایمر</h2>
+      <p>هر کار دارای تایمر داخلی است. می‌توانید چندین بار تایمر را شروع و متوقف کنید — همه بازه‌های کاری ذخیره می‌شوند.</p>
+
+      <h3>نحوه استفاده از تایمر</h3>
       <div class="steps-list">
-        <div class="step-item"><div class="step-num">۱</div><div class="step-content"><strong>شروع تایمر</strong><span>روی دکمه ▶ روی کارت کلیک کنید</span></div></div>
-        <div class="step-item"><div class="step-num">۲</div><div class="step-content"><strong>کار کنید</strong><span>تایمر بازه فعالیت را ثبت می‌کند</span></div></div>
-        <div class="step-item"><div class="step-num">۳</div><div class="step-content"><strong>توقف تایمر</strong><span>روی دکمه ■ کلیک کنید</span></div></div>
-        <div class="step-item"><div class="step-num">۴</div><div class="step-content"><strong>مشاهده گزارش</strong><span>در آمار → جزئیات → بازه‌های انجام کار</span></div></div>
+        <div class="step-item"><div class="step-num">۱</div><div class="step-content"><strong>شروع تایمر</strong><span>روی آیکون ▶️ در کارت کانبان یا درون فرم کار کلیک کنید</span></div></div>
+        <div class="step-item"><div class="step-num">۲</div><div class="step-content"><strong>توقف موقت</strong><span>روی ⏸ کلیک کنید — بازه کاری ذخیره می‌شود اما می‌توانید دوباره شروع کنید</span></div></div>
+        <div class="step-item"><div class="step-num">۳</div><div class="step-content"><strong>بررسی بازه‌ها</strong><span>در فرم کار، تب «تایمر» همه بازه‌های کاری را نشان می‌دهد</span></div></div>
       </div>
-      <div class="note"><span class="note-icon">⚠️</span><span>هر بار فقط یک تایمر می‌تواند فعال باشد.</span></div>
       <table class="doc-table">
         <tr><th>فیلد</th><th>توضیح</th></tr>
         <tr><td>زمان تخمینی</td><td>مدت زمان پیش‌بینی‌شده (دقیقه)</td></tr>
         <tr><td>زمان واقعی</td><td>جمع همه بازه‌های تایمر</td></tr>
-        <tr><td>اختلاف</td><td>مقایسه تخمین با واقعیت</td></tr>
+        <tr><td>اختلاف</td><td>مقایسه تخمین با واقعیت — در ماتریس سلامت تخمین نمایش داده می‌شود</td></tr>
       </table>
+      <div class="tip"><span class="tip-icon">💡</span><span>تایمر در پس‌زمینه اجرا می‌شود. اگر فراموش کردید متوقفش کنید، هنگام باز کردن برنامه می‌توانید آن را اصلاح کنید.</span></div>
     </section>
 
-    <!-- ۵ گانت -->
+    <!-- ۶ گانت -->
     <section class="doc-section" id="gantt">
-      <h2>📊 ۵. تایم‌لاین (Gantt Chart)</h2>
-      <p>نمایش بصری زمان‌بندی کارها روی محور زمان. فقط کارهایی که وارد «در حال انجام» شده باشند نمایش داده می‌شوند.</p>
+      <h2>📊 ۶. تایم‌لاین (Gantt Chart)</h2>
+      <p>نمایش بصری زمان‌بندی کارها روی محور زمان. فقط کارهایی که وارد ستون «در حال انجام» شده‌اند نمایش داده می‌شوند.</p>
+
+      <h3>کنترل‌ها</h3>
       <table class="doc-table">
         <tr><th>عملیات</th><th>روش</th></tr>
         <tr><td>Zoom in/out</td><td>اسکرول موس روی chart</td></tr>
         <tr><td>جابجایی (Pan)</td><td>کلیک و کشیدن روی محور زمان یا chart</td></tr>
-        <tr><td>بازنشانی</td><td>دکمه «بازنشانی زوم»</td></tr>
+        <tr><td>بازنشانی نما</td><td>دکمه «بازنشانی زوم»</td></tr>
       </table>
+
       <h3>سطوح زوم</h3>
       <ul>
         <li><strong>ماه‌ها:</strong> نمای کلی پروژه‌های بلندمدت</li>
@@ -367,158 +398,251 @@ code { background: var(--gray100); border: 1px solid var(--gray200); border-radi
         <li><strong>ساعت‌ها:</strong> برنامه‌ریزی ساعتی</li>
         <li><strong>دقیقه‌ها:</strong> بررسی بازه‌های کاری دقیق</li>
       </ul>
+
       <h3>بازه‌های انجام کار</h3>
-      <p>در حالت «روزها» به پایین، دکمه <strong>⏱ نمایش بازه‌های انجام کار</strong> ظاهر می‌شود. با فعال کردن آن، هر بازه تایمر جداگانه نمایش داده می‌شود.</p>
+      <p>در حالت روزها به پایین، دکمه <strong>⏱ نمایش بازه‌های انجام کار</strong> ظاهر می‌شود. با فعال کردن آن، هر بازه تایمر جداگانه نمایش داده می‌شود.</p>
+
+      <h3>فازبندی در Gantt</h3>
+      <p>اگر برای پروژه فاز تعریف کرده باشید، کارها با رنگ فاز مربوطه در Gantt نمایش داده می‌شوند و sidebar فاز هر کار را نشان می‌دهد.</p>
       <div class="tip"><span class="tip-icon">💡</span><span>Tooltip هر نوار با hover موس نشان داده می‌شود و شامل تاریخ شروع، پایان، مدت و زمان کار است.</span></div>
     </section>
 
-    <!-- ۶ طوفان فکری -->
+    <!-- ۷ طوفان فکری -->
     <section class="doc-section" id="brainstorm">
-      <h2>🧠 ۶. بورد طوفان فکری — ثبت ایده‌ها و اطلاعات</h2>
-      <p>فضایی آزاد برای جمع‌آوری ایده‌ها، منابع و اطلاعات مرتبط با پروژه.</p>
+      <h2>🧠 ۷. بورد طوفان فکری</h2>
+      <p>فضایی آزاد برای جمع‌آوری ایده‌ها، منابع، لینک‌ها و اطلاعات مرتبط با پروژه. هر کارت می‌تواند متن، پوشه، فایل و لینک داشته باشد.</p>
+
       <h3>ایجاد کارت</h3>
       <ul>
-        <li><strong>+ کارت جدید:</strong> پنجره کامل با تمام گزینه‌ها</li>
-        <li><strong>⚡ افزودن سریع:</strong> فقط متن، ذخیره خودکار بعد از ۲ ثانیه توقف تایپ</li>
+        <li><strong>+ کارت جدید:</strong> پنجره کامل با تمام فیلدها</li>
+        <li><strong>⚡ افزودن سریع:</strong> ویرایشگر Markdown سریع با ذخیره خودکار — می‌توانید دسته‌بندی و برچسب هم انتخاب کنید</li>
       </ul>
-      <h3>ساختار کارت</h3>
+
+      <h3>فیلدهای کارت</h3>
       <table class="doc-table">
         <tr><th>بخش</th><th>توضیح</th></tr>
-        <tr><td>عنوان</td><td>اجباری — نام ایده</td></tr>
+        <tr><td>عنوان</td><td>اجباری — نام ایده یا منبع</td></tr>
         <tr><td>دسته‌بندی</td><td>متن، تصویری، صوتی، ویدیویی، PDF، اکسل، پاورپوینت، فایل متنی</td></tr>
-        <tr><td>برچسب</td><td>برچسب‌های رنگی سفارشی</td></tr>
-        <tr><td>محتوا</td><td>ویرایشگر متن غنی با قالب‌بندی</td></tr>
+        <tr><td>برچسب</td><td>برچسب‌های رنگی سفارشی (قابل تعریف در تنظیمات)</td></tr>
+        <tr><td>محتوا</td><td>ویرایشگر Markdown با toolbar (Bold، Italic، Heading، List و...)</td></tr>
         <tr><td>پوشه</td><td>لینک به پوشه روی سیستم — با کلیک باز می‌شود</td></tr>
         <tr><td>فایل</td><td>فایل‌های مرتبط — با کلیک در Explorer نشان داده می‌شود</td></tr>
-        <tr><td>لینک</td><td>URL — با کلیک کپی می‌شود</td></tr>
+        <tr><td>لینک</td><td>آدرس‌های وب — با کلیک کپی می‌شوند</td></tr>
       </table>
+
+      <h3>ویرایشگر Markdown</h3>
+      <p>محتوای کارت با ویرایشگر Markdown نوشته می‌شود. تب «ویرایش» برای نوشتن و تب «پیش‌نمایش» برای مشاهده خروجی نهایی است.</p>
+      <p>Toolbar ویرایشگر شامل: <kbd>B</kbd> Bold، <kbd>I</kbd> Italic، <kbd>S</kbd> Strikethrough، <kbd>&lt;/&gt;</kbd> Inline Code، <kbd>H1</kbd> <kbd>H2</kbd> <kbd>H3</kbd> Heading، لیست نقطه‌ای، لیست عددی، Blockquote، خط افقی.</p>
+
+      <h3>نمایش محتوا</h3>
+      <p>در نمای Grid، با کلیک روی متن کارت، یک پاپ‌آپ بزرگ باز می‌شود که محتوای Markdown را به صورت رندرشده نمایش می‌دهد. برای بستن پاپ‌آپ، بیرون از آن کلیک کنید.</p>
+
+      <h3>انتخاب چندتایی و عملیات گروهی</h3>
+      <div class="steps-list">
+        <div class="step-item"><div class="step-num">۱</div><div class="step-content"><strong>حالت انتخاب چندتایی را فعال کنید</strong><span>روی دکمه «☑ انتخاب چندتایی» کلیک کنید</span></div></div>
+        <div class="step-item"><div class="step-num">۲</div><div class="step-content"><strong>کارت‌ها را انتخاب کنید</strong><span>روی هر کارت کلیک کنید — border بنفش نشان‌دهنده انتخاب است</span></div></div>
+        <div class="step-item"><div class="step-num">۳</div><div class="step-content"><strong>عملیات گروهی انجام دهید</strong><span>در نوار شناور پایین، دسته‌بندی یا برچسب را انتخاب کرده و «+ افزودن» یا «− حذف» را بزنید</span></div></div>
+      </div>
+      <p>دکمه «✓ انتخاب همه» در نوار شناور، همه کارت‌های فیلترشده را یک‌جا انتخاب می‌کند.</p>
+
       <h3>علامت‌گذاری کارت به عنوان انجام‌شده</h3>
-      <p>در نمای شبکه‌ای (grid)، هر کارت یک چک‌باکس در گوشه پایین-چپ دارد که با hover ظاهر می‌شود. با تیک زدن آن:</p>
-      <ul>
-        <li>کارت با شفافیت کمتر (کمرنگ‌تر) نمایش داده می‌شود تا از کارت‌های فعال متمایز باشد</li>
-        <li>وضعیت done هنگام ویرایش کارت حفظ می‌شود</li>
-      </ul>
-      <h3>فیلتر نمایش کارت‌ها</h3>
-      <p>در نوار بالای بورد، منوی «نمایش» سه حالت دارد:</p>
+      <p>در نمای Grid، هر کارت یک چک‌باکس در گوشه پایین-چپ دارد که با hover ظاهر می‌شود. با تیک زدن آن، کارت کمرنگ‌تر نمایش داده می‌شود تا از کارت‌های فعال متمایز باشد.</p>
+
+      <h3>فیلترها</h3>
       <table class="doc-table">
-        <tr><th>گزینه</th><th>نمایش</th></tr>
-        <tr><td>همه</td><td>تمام کارت‌ها</td></tr>
-        <tr><td>تیک دارد</td><td>فقط کارت‌های انجام‌شده</td></tr>
-        <tr><td>تیک ندارد</td><td>فقط کارت‌های ناتمام</td></tr>
+        <tr><th>فیلتر</th><th>کاربرد</th></tr>
+        <tr><td>دسته‌بندی</td><td>نمایش کارت‌هایی که حداقل یکی از دسته‌بندی‌های انتخابی را دارند (OR)</td></tr>
+        <tr><td>برچسب</td><td>نمایش کارت‌هایی که حداقل یکی از برچسب‌های انتخابی را دارند (OR)</td></tr>
+        <tr><td>جستجو</td><td>جستجو در عنوان و محتوای کارت‌ها</td></tr>
+        <tr><td>نمایش</td><td>همه / تیک دارد / تیک ندارد</td></tr>
       </table>
+
       <h3>جابجایی کارت‌ها</h3>
       <div class="steps-list">
-        <div class="step-item"><div class="step-num">۱</div><div class="step-content"><strong>حالت جابجایی را فعال کنید</strong><span>روی دکمه 🔀 جابجایی کلیک کنید (نارنجی می‌شود)</span></div></div>
-        <div class="step-item"><div class="step-num">۲</div><div class="step-content"><strong>کارت مبدأ را انتخاب کنید</strong><span>کلیک کنید — border طلایی نشان داده می‌شود</span></div></div>
+        <div class="step-item"><div class="step-num">۱</div><div class="step-content"><strong>حالت جابجایی را فعال کنید</strong><span>روی دکمه 🔀 جابجایی کلیک کنید — نارنجی می‌شود</span></div></div>
+        <div class="step-item"><div class="step-num">۲</div><div class="step-content"><strong>کارت مبدأ را کلیک کنید</strong><span>border طلایی نشان داده می‌شود</span></div></div>
         <div class="step-item"><div class="step-num">۳</div><div class="step-content"><strong>کارت مقصد را کلیک کنید</strong><span>جابجایی فوری انجام می‌شود</span></div></div>
       </div>
-      <div class="tip"><span class="tip-icon">💡</span><span>از بورد طوفان فکری برای ذخیره ایده‌های اولیه استفاده کنید و پس از بررسی، ایده‌های تأیید شده را با چک‌باکس علامت‌گذاری کنید.</span></div>
+      <div class="tip"><span class="tip-icon">💡</span><span>از بورد طوفان فکری برای ذخیره ایده‌های اولیه استفاده کنید. پس از بررسی، ایده‌های تأیید شده را با چک‌باکس علامت‌گذاری کنید.</span></div>
     </section>
 
-    <!-- ۷ آمار -->
+    <!-- ۸ آمار -->
     <section class="doc-section" id="stats">
-      <h2>📈 ۷. داشبورد آمار — ۶ تب</h2>
+      <h2>📈 ۸. داشبورد آمار</h2>
+      <p>داشبورد آمار ۶ تب دارد که هر کدام جنبه‌ای از عملکرد و پیشرفت پروژه را نشان می‌دهند.</p>
+
       <table class="doc-table">
         <tr><th>تب</th><th>محتوا</th></tr>
-        <tr><td>جریان</td><td>نمودار Cumulative Flow — وضعیت کارها در طول زمان</td></tr>
-        <tr><td>بهره‌وری</td><td>Heatmap ماهانه شمسی، زمان کاری روزانه</td></tr>
-        <tr><td>برنامه‌ریزی</td><td>Burndown Chart، ماتریس سلامت تخمین</td></tr>
-        <tr><td>بررسی پروژه</td><td>تحلیل کامل پروژه، نمودار پراکندگی زمان</td></tr>
-        <tr><td>جزئیات</td><td>بازه‌های فعالیت تایمر، تاریخچه جابجایی کارها</td></tr>
-        <tr><td>جریان کار</td><td>Lead Time و Cycle Time</td></tr>
+        <tr><td>جریان</td><td>نمودار Cumulative Flow — وضعیت کارها در طول زمان، تشخیص گلوگاه</td></tr>
+        <tr><td>بهره‌وری</td><td>Heatmap روزانه شمسی، نمودار زمان کاری روز به روز</td></tr>
+        <tr><td>برنامه‌ریزی</td><td>Burndown Chart، ماتریس سلامت تخمین (مقایسه تخمین با واقعیت)</td></tr>
+        <tr><td>بررسی پروژه</td><td>تحلیل کامل آمار پروژه، نمودار پراکندگی زمان کار</td></tr>
+        <tr><td>جزئیات</td><td>جدول بازه‌های فعالیت تایمر، تاریخچه جابجایی کارها بین ستون‌ها</td></tr>
+        <tr><td>جریان کار</td><td>Lead Time و Cycle Time — مدت‌زمان از ثبت تا پایان کارها</td></tr>
       </table>
       <div class="tip"><span class="tip-icon">💡</span><span>Heatmap شمسی ماه‌های واقعی پروژه را نشان می‌دهد. هرچه رنگ تیره‌تر، زمان بیشتری در آن روز کار شده است.</span></div>
     </section>
 
-    <!-- ۸ آرشیو -->
+    <!-- ۹ آرشیو -->
     <section class="doc-section" id="archive">
-      <h2>🗄 ۸. آرشیو</h2>
-      <p>کارهای «انجام شده» می‌توانند آرشیو شوند تا بورد کانبان خلوت‌تر باشد.</p>
+      <h2>🗄 ۹. آرشیو</h2>
+      <p>کارهای تمام‌شده می‌توانند آرشیو شوند تا بورد کانبان خلوت‌تر و خواناتر باشد.</p>
+
+      <h3>آرشیو کردن کار</h3>
+      <ol>
+        <li>کار را به ستون «انجام‌شده» منتقل کنید</li>
+        <li>روی دکمه آرشیو (📦) در کارت کلیک کنید</li>
+        <li>کار از بورد اصلی حذف و به بخش آرشیو منتقل می‌شود</li>
+      </ol>
+
+      <h3>مشاهده آرشیو</h3>
+      <p>از دکمه «آرشیو» در هدر بورد وارد بخش آرشیو شوید. کارهای آرشیوشده با تمام اطلاعات نمایش داده می‌شوند.</p>
+
+      <h3>امکانات آرشیو</h3>
       <ul>
-        <li>برای آرشیو، کارت را از ستون «انجام شده» آرشیو کنید</li>
-        <li>کارهای آرشیو در بخش <strong>آرشیو</strong> قابل مشاهده‌اند</li>
-        <li>می‌توانید کارها را از آرشیو برگردانید</li>
-        <li>در آرشیو می‌توانید <strong>یادداشت پایانی</strong> اضافه یا ویرایش کنید</li>
+        <li>مشاهده تمام اطلاعات کار آرشیوشده</li>
+        <li>اضافه یا ویرایش <strong>یادداشت پایانی</strong> — ثبت تجربه و درس‌آموخته</li>
+        <li>بازگرداندن کار به بورد اصلی</li>
+        <li>حذف دائمی کار از آرشیو</li>
       </ul>
+      <div class="tip"><span class="tip-icon">💡</span><span>یادداشت پایانی را پس از اتمام هر کار ثبت کنید تا در بررسی‌های آینده بتوانید از تجربیات استفاده کنید.</span></div>
     </section>
 
-    <!-- ۹ تنظیمات -->
+    <!-- ۱۰ تنظیمات -->
     <section class="doc-section" id="settings">
-      <h2>⚙️ ۹. تنظیمات بورد</h2>
+      <h2>⚙️ ۱۰. تنظیمات بورد</h2>
+      <p>از دکمه «تنظیمات» در هدر بورد وارد این بخش شوید. تنظیمات هر پروژه مستقل است.</p>
+
+      <h3>پنهان‌سازی خودکار هدر</h3>
+      <p>سه حالت قابل انتخاب است — فقط یکی می‌تواند فعال باشد:</p>
+      <table class="doc-table">
+        <tr><th>حالت</th><th>رفتار</th></tr>
+        <tr><td>غیرفعال</td><td>هدر همیشه نمایش داده می‌شود</td></tr>
+        <tr><td>پنهان‌سازی کل هدر</td><td>پس از ۲.۵ ثانیه هدر پنهان می‌شود — با بردن موس به لبه بالای صفحه ظاهر می‌شود</td></tr>
+        <tr><td>پنهان‌سازی دکمه‌ها</td><td>فقط دکمه‌های ناوبری پنهان می‌شوند — دکمه برگشت همیشه نمایش دارد</td></tr>
+      </table>
+
       <h3>دسته‌بندی کارها (نوع)</h3>
-      <p>نوع کار را مشخص می‌کند: قابلیت، عیب‌یابی، بهبود، تحقیق، طراحی، مستندات...</p>
+      <p>نوع کار را مشخص می‌کند. انواع پیش‌فرض: قابلیت، عیب‌یابی، بهبود، تحقیق، طراحی، مستندات، امنیت، مهاجرت، پیکربندی.</p>
+      <ul>
+        <li>هر نوع پیش‌فرض می‌تواند فعال یا غیرفعال شود</li>
+        <li>می‌توانید انواع سفارشی اضافه کنید</li>
+      </ul>
+
       <h3>برچسب‌ها</h3>
-      <p>برچسب‌های چندتایی برای دسته‌بندی بیشتر: فرانت‌اند، بک‌اند، موبایل، امنیت...</p>
-      <h3>فازبندی</h3>
+      <p>برچسب‌های رنگی چندتایی برای دسته‌بندی بیشتر. برچسب‌های پیش‌فرض: فرانت‌اند، بک‌اند، موبایل، امنیت، دیتابیس، DevOps و...</p>
+      <ul>
+        <li>هر برچسب با رنگ تصادفی ایجاد می‌شود — رنگ قابل تغییر نیست</li>
+        <li>برچسب‌های سفارشی قابل حذف هستند — پیش‌فرض‌ها فقط غیرفعال می‌شوند</li>
+      </ul>
+
+      <h3>فازبندی پروژه</h3>
       <p>کارها را به فازهای پروژه تقسیم کنید. فازها در Gantt Chart با رنگ‌های مختلف نشان داده می‌شوند.</p>
+      <ul>
+        <li>هر فاز یک نام و برچسب اختصاری دارد</li>
+        <li>رنگ فاز به صورت خودکار تولید و ذخیره می‌شود</li>
+        <li>کار را می‌توانید از طریق فرم ویرایش به فاز مربوط نسبت دهید</li>
+      </ul>
+
+      <h3>ترتیب اجرای کارها</h3>
+      <p>با تعیین شماره ترتیب برای هر کار، می‌توانید توالی اجرا را در نمای مخصوص مشاهده کنید.</p>
+
+      <h3>وابستگی‌های کارها</h3>
+      <p>می‌توانید کارهایی که یک کار به آن‌ها وابسته است را مشخص کنید. این ارتباط در فرم کار و در بخش «وابستگی‌ها» قابل مدیریت است.</p>
     </section>
 
-    <!-- ۱۰ Export -->
+    <!-- ۱۱ پشتیبان‌گیری -->
     <section class="doc-section" id="export">
-      <h2>💾 ۱۰. خروجی و پشتیبان‌گیری</h2>
-      <h3>Export پروژه <span style="font-size:11px;background:var(--yellow);border:1px solid #18181b;border-radius:4px;padding:1px 8px;color:#18181b;font-weight:700;">پرو</span></h3>
-      <p>از صفحه اصلی روی آیکون Export کلیک کنید. فایل JSON کامل پروژه ذخیره می‌شود.</p>
-      <h3>وارد کردن پشتیبان <span style="font-size:11px;background:var(--yellow);border:1px solid #18181b;border-radius:4px;padding:1px 8px;color:#18181b;font-weight:700;">پرو</span></h3>
-      <p>دکمه «وارد کردن» در صفحه اصلی — فرآیند در دو مرحله انجام می‌شود:</p>
+      <h2>💾 ۱۱. پشتیبان‌گیری و انتقال داده</h2>
+
+      <h3>خروجی (پشتیبان‌گیری) <span class="pro-badge">پرو</span></h3>
+      <p>از صفحه اصلی روی دکمه «خروجی» کلیک کنید. فایل JSON حاوی همه پروژه‌ها و داده‌ها ذخیره می‌شود.</p>
+      <div class="tip"><span class="tip-icon">💡</span><span>قبل از هر عملیات مهم (به‌روزرسانی، تغییر بزرگ)، یک خروجی تهیه کنید.</span></div>
+
+      <h3>وارد کردن (بازیابی) <span class="pro-badge">پرو</span></h3>
+      <p>فرآیند وارد کردن دو مرحله دارد تا از اشتباه جلوگیری شود:</p>
       <div class="steps-list">
         <div class="step-item"><div class="step-num">۱</div><div class="step-content"><strong>پنجره راهنما</strong><span>هشدار جایگزینی کامل داده‌ها نمایش داده می‌شود — روی «انتخاب فایل» کلیک کنید</span></div></div>
-        <div class="step-item"><div class="step-num">۲</div><div class="step-content"><strong>تحلیل خودکار و تأیید</strong><span>برنامه فایل را با داده‌های فعلی مقایسه می‌کند و نتیجه را نشان می‌دهد</span></div></div>
+        <div class="step-item"><div class="step-num">۲</div><div class="step-content"><strong>تحلیل خودکار</strong><span>برنامه فایل را با داده‌های فعلی مقایسه می‌کند: تعداد پروژه، کار، فاز، کارت ایده و بازه‌های تایمر</span></div></div>
+        <div class="step-item"><div class="step-num">۳</div><div class="step-content"><strong>تأیید نهایی</strong><span>پس از بررسی نتیجه تحلیل، با دکمه «تأیید و وارد کردن» عملیات انجام می‌شود</span></div></div>
       </div>
+
       <h3>وضعیت‌های تحلیل فایل</h3>
       <table class="doc-table">
-        <tr><th>وضعیت</th><th>معنا</th><th>رنگ هشدار</th></tr>
-        <tr><td>🟢 جدیدتر</td><td>فایل ورودی نسبت به داده‌های فعلی جدیدتر است</td><td>سبز</td></tr>
-        <tr><td>🟠 قدیمی‌تر</td><td>فایل ورودی قدیمی‌تر از داده‌های فعلی است — احتیاط کنید</td><td>نارنجی</td></tr>
-        <tr><td>🔵 مشابه</td><td>محتوا و تاریخ بسیار نزدیک به داده‌های فعلی است</td><td>آبی</td></tr>
-        <tr><td>🔴 متفاوت</td><td>کمتر از ۲۰٪ اشتراک — احتمالاً از نصب دیگری است</td><td>قرمز</td></tr>
+        <tr><th>وضعیت</th><th>معنا</th><th>توصیه</th></tr>
+        <tr><td>🟢 جدیدتر</td><td>فایل ورودی نسبت به داده‌های فعلی جدیدتر است</td><td>ایمن برای وارد کردن</td></tr>
+        <tr><td>🟠 قدیمی‌تر</td><td>فایل ورودی قدیمی‌تر از داده‌های فعلی است</td><td>با احتیاط ادامه دهید</td></tr>
+        <tr><td>🔵 مشابه</td><td>محتوا و تاریخ بسیار نزدیک هستند</td><td>احتمالاً بی‌تفاوت</td></tr>
+        <tr><td>🔴 متفاوت</td><td>کمتر از ۲۰٪ اشتراک — احتمالاً از نصب دیگری</td><td>با احتیاط زیاد ادامه دهید</td></tr>
       </table>
-      <p>در پنجره تحلیل، جدول مقایسه آماری (تعداد پروژه، کار، فاز، کارت ایده و بازه‌های تایمر) و لیست پروژه‌های منحصربه‌فرد نمایش داده می‌شود. پس از بررسی، با دکمه «تأیید و وارد کردن» عملیات انجام می‌شود.</p>
-      <div class="note"><span class="note-icon">⚠️</span><span>وارد کردن، <strong>تمام داده‌های فعلی را جایگزین می‌کند</strong> و قابل بازگشت نیست. قبل از وارد کردن، یک خروجی از داده‌های فعلی بگیرید.</span></div>
-      <h3>خروجی برای AI <span style="font-size:11px;background:var(--yellow);border:1px solid #18181b;border-radius:4px;padding:1px 8px;color:#18181b;font-weight:700;">پرو</span></h3>
-      <p>آیکون 🤖 در صفحه اصلی — پروژه‌های مورد نظر را انتخاب کنید و فرمت (JSON یا Markdown) را مشخص کنید.</p>
-      <div class="note"><span class="note-icon">⚠️</span><span>داده‌ها کاملاً محلی هستند. هیچ اطلاعاتی به اینترنت ارسال نمی‌شود.</span></div>
+      <div class="warn"><span class="warn-icon">⚠️</span><span>وارد کردن، <strong>تمام داده‌های فعلی را جایگزین می‌کند</strong> و قابل بازگشت نیست. قبل از وارد کردن، یک خروجی از داده‌های فعلی بگیرید.</span></div>
+
+      <h3>خروجی برای هوش مصنوعی <span class="pro-badge">پرو</span></h3>
+      <p>از دکمه 🤖 در صفحه اصلی برای تهیه خروجی بهینه شده برای ارسال به ChatGPT، Claude یا سایر دستیارهای هوش مصنوعی استفاده کنید.</p>
+      <ul>
+        <li>می‌توانید پروژه‌های مورد نظر را انتخاب کنید</li>
+        <li>دو فرمت: JSON (برای پردازش برنامه‌نویسی) و Markdown (خوانا برای انسان)</li>
+        <li>داده‌ها به فارسی و با تاریخ شمسی خوانا هستند</li>
+      </ul>
+      <div class="note"><span class="note-icon">ℹ️</span><span>داده‌ها کاملاً محلی هستند. هیچ اطلاعاتی به اینترنت ارسال نمی‌شود — خروجی برای AI هم فقط یک فایل ذخیره‌شده روی سیستم شماست.</span></div>
     </section>
 
-    <!-- ۱۱ نکات -->
+    <!-- ۱۲ نکات -->
     <section class="doc-section" id="tips">
-      <h2>💡 ۱۱. نکات حرفه‌ای</h2>
-      <h3>بهترین روش استفاده</h3>
+      <h2>💡 ۱۲. نکات حرفه‌ای</h2>
+
+      <h3>گردش کار پیشنهادی</h3>
+      <ol>
+        <li>برای هر پروژه ابتدا <strong>فازها</strong> را تعریف کنید</li>
+        <li>کارها را با <strong>دسته‌بندی</strong> و <strong>برچسب</strong> مرتب کنید</li>
+        <li><strong>زمان تخمینی</strong> را همیشه وارد کنید تا ماتریس سلامت تخمین دقیق باشد</li>
+        <li><strong>تایمر</strong> را هر بار که شروع به کار می‌کنید فعال کنید — حتی برای ۱۵ دقیقه</li>
+        <li>بعد از اتمام هر کار <strong>یادداشت پایانی</strong> ثبت کنید</li>
+        <li>ایده‌های اولیه را در <strong>بورد طوفان فکری</strong> ثبت کنید قبل از تبدیل به کارت کانبان</li>
+        <li>هفته‌ای یک بار از داده‌ها <strong>خروجی</strong> بگیرید</li>
+      </ol>
+
+      <h3>نکات کانبان</h3>
       <ul>
-        <li>برای هر پروژه ابتدا فازها را تعریف کنید تا در Gantt Chart سازمان‌یافته‌تر باشد</li>
-        <li>زمان تخمینی را همیشه وارد کنید تا ماتریس سلامت تخمین دقیق باشد</li>
-        <li>تایمر را هر بار که شروع به کار می‌کنید فعال کنید — حتی برای ۱۵ دقیقه</li>
-        <li>بعد از اتمام هر کار یادداشت پایانی ثبت کنید</li>
-        <li>از بورد طوفان فکری برای ذخیره ایده‌ها قبل از تبدیل به کارت کانبان استفاده کنید</li>
+        <li>تعداد کارها در ستون «در حال انجام» را محدود نگه دارید (WIP Limit) — نرم‌افزار این را در آمار نشان می‌دهد</li>
+        <li>کارها را کوچک و تک‌وظیفه‌ای تعریف کنید تا پیشرفت ملموس‌تر باشد</li>
+        <li>وابستگی‌ها را مشخص کنید تا ترتیب اجرا روشن باشد</li>
       </ul>
-      <h3>میانبرها</h3>
+
+      <h3>نکات تایمر</h3>
+      <ul>
+        <li>تایمر چندین بار قابل توقف و شروع مجدد است — جمع بازه‌ها به عنوان «زمان واقعی» ثبت می‌شود</li>
+        <li>اگر تایمر را روشن و فراموش کردید، بازه اضافه را می‌توانید در فرم کار حذف کنید</li>
+        <li>نمودار Heatmap روزانه نشان می‌دهد در کدام روزها بیشتر کار کرده‌اید</li>
+      </ul>
+
+      <h3>میانبرها و راهنمای سریع</h3>
       <div class="shortcuts">
-        <div class="shortcut-item"><span class="label">ایجاد کار جدید</span><kbd>+ کار جدید</kbd></div>
+        <div class="shortcut-item"><span class="label">ایجاد کار جدید در ستون</span><kbd>+ کار جدید</kbd></div>
         <div class="shortcut-item"><span class="label">Zoom در Gantt</span><kbd>Scroll موس</kbd></div>
         <div class="shortcut-item"><span class="label">Pan در Gantt</span><kbd>کلیک + کشیدن</kbd></div>
-        <div class="shortcut-item"><span class="label">جابجایی سریع کار</span><kbd>دکمه ←</kbd></div>
+        <div class="shortcut-item"><span class="label">Undo در ویرایشگر Markdown</span><kbd>Ctrl + Z</kbd></div>
         <div class="shortcut-item"><span class="label">افزودن سریع ایده</span><kbd>⚡ افزودن سریع</kbd></div>
         <div class="shortcut-item"><span class="label">کپی لینک در Brainstorm</span><kbd>کلیک روی 🔗</kbd></div>
+        <div class="shortcut-item"><span class="label">باز کردن پوشه کارت</span><kbd>کلیک روی 📂</kbd></div>
+        <div class="shortcut-item"><span class="label">نمایش فایل در Explorer</span><kbd>کلیک روی 📎</kbd></div>
       </div>
     </section>
 
   </main>
 </div>
 
-<!-- footer -->
 <footer style="background:#0f0f11;color:#f4f4f5;border-top:2px solid #27272a;padding:28px 0;font-family:'Vazirmatn',sans-serif;">
   <div style="max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#52525b;">
     <span>© ۱۴۰۵ کانبان دسکتاپ — بهروز شیخان</span>
     <div style="display:flex;gap:20px;">
       <a href="index.html" style="color:#71717a;text-decoration:none;" onmouseover="this.style.color='#ffbe1a'" onmouseout="this.style.color='#71717a'">صفحه اصلی</a>
       <a href="index.html#pricing" style="color:#71717a;text-decoration:none;" onmouseover="this.style.color='#ffbe1a'" onmouseout="this.style.color='#71717a'">قیمت‌گذاری</a>
-      <a href="https://github.com/behroozsheikhan/kanban-desktop/issues" style="color:#71717a;text-decoration:none;" onmouseover="this.style.color='#ffbe1a'" onmouseout="this.style.color='#71717a'">GitHub</a>
     </div>
-    <span>v2.1.0</span>
   </div>
 </footer>
 
 <script>
-// active sidebar link on scroll
 const sections = document.querySelectorAll('.doc-section');
 const navLinks = document.querySelectorAll('.sidebar-nav a');
 const observer = new IntersectionObserver(entries => {
@@ -532,7 +656,6 @@ const observer = new IntersectionObserver(entries => {
 }, { rootMargin: '-20% 0px -70% 0px' });
 sections.forEach(s => observer.observe(s));
 
-// theme toggle
 function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
@@ -545,11 +668,10 @@ if (saved === 'dark') {
   document.getElementById('themeBtn').textContent = '☀️';
 }
 
-// navbar scroll shadow
 window.addEventListener('scroll', () => {
   document.querySelector('.navbar').style.boxShadow =
     window.scrollY > 10 ? '0 4px 20px rgba(0,0,0,0.08)' : 'none';
 });
 </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1e3f9e86a2213b8',t:'MTc4NDU3MTU4Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1f2770e4bc6bc89',t:'MTc4NDcyMzUxNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
